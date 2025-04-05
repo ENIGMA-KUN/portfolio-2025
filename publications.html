@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications | Shubham Chakraborty</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .gradient-text {
+            background-image: linear-gradient(45deg, #4F46E5, #EC4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .publication-card:hover {
+            transform: translateY(-5px);
+        }
+        .citation-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4F46E5, #EC4899);
+            color: white;
+            font-weight: bold;
+            border: 3px solid #1F2937;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full bg-gray-900 bg-opacity-90 backdrop-filter backdrop-blur-lg z-50 border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold">Shubham Chakraborty</a>
+            <div class="hidden md:flex space-x-10">
+                <a href="research.html" class="hover:text-blue-400 transition-colors">Research</a>
+                <a href="publications.html" class="text-blue-400 transition-colors">Publications</a>
+                <a href="experience.html" class="hover:text-blue-400 transition-colors">Experience</a>
+                <a href="contact.html" class="hover:text-blue-400 transition-colors">Contact</a>
+            </div>
+            <div class="flex space-x-4">
+                <a href="https://github.com/enigma-kun" target="_blank" class="text-gray-400 hover:text-white">
+                    <i class="fab fa-github text-xl"></i>
+                </a>
+                <a href="https://linkedin.com/in/shubham-chakraborty" target="_blank" class="text-gray-400 hover:text-white">
+                    <i class="fab fa-linkedin text-xl"></i>
+                </a>
+                <a href="https://scholar.google.com" target="_blank" class="text-gray-400 hover:text-white">
+                    <i class="fas fa-graduation-cap text-xl"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <section class="pt-32 pb-10 px-6 bg-gradient-to-b from-gray-900 to-gray-800">
+        <div class="container mx-auto">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 text-center">
+                Academic <span class="gradient-text">Publications</span>
+            </h1>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto text-center mb-8">
+                Peer-reviewed research papers focusing on AI advancements, LLM capabilities, multimodal systems, and medical imaging analysis.
+            </p>
+            
+            <!-- Publication Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto mb-12">
+                <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 text-center">
+                    <div class="text-4xl font-bold text-blue-500 mb-2">4</div>
+                    <div class="text-xl">Publications</div>
+                </div>
+                <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 text-center">
+                    <div class="text-4xl font-bold text-purple-500 mb-2">43</div>
+                    <div class="text-xl">Citations</div>
+                </div>
+                <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 text-center">
+                    <div class="text-4xl font-bold text-green-500 mb-2">2</div>
+                    <div class="text-xl">Under Review</div>
+                </div>
+            </div>
+            
+            <!-- Publication Categories -->
+            <div class="flex flex-wrap justify-center mb-10">
+                <button class="pub-filter-btn bg-blue-600 px-6 py-3 mx-2 mb-4 text-lg rounded-lg focus:outline-none" data-filter="all">
+                    All Publications
+                </button>
+                <button class="pub-filter-btn bg-gray-800 px-6 py-3 mx-2 mb-4 text-lg rounded-lg focus:outline-none hover:bg-gray-700" data-filter="nlp">
+                    NLP / LLMs
+                </button>
+                <button class="pub-filter-btn bg-gray-800 px-6 py-3 mx-2 mb-4 text-lg rounded-lg focus:outline-none hover:bg-gray-700" data-filter="multimodal">
+                    Multimodal
+                </button>
+                <button class="pub-filter-btn bg-gray-800 px-6 py-3 mx-2 mb-4 text-lg rounded-lg focus:outline-none hover:bg-gray-700" data-filter="environmental">
+                    Environmental AI
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section class="py-20 px-6 bg-gray-900">
+        <div class="container mx-auto">
+            <!-- Citation Graph -->
+            <div class="bg-gray-800 rounded-xl p-6 mb-16 border border-gray-700">
+                <h2 class="text-2xl font-bold mb-6">Publication Impact</h2>
+                <canvas id="citation-chart" width="400" height="200"></canvas>
+            </div>
+            
+            <!-- Published Papers -->
+            <h2 class="text-3xl font-bold mb-10">
+                Published <span class="gradient-text">Research</span>
+            </h2>
+            
+            <div class="publication-container grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- Publication 1 -->
+                <div class="publication-card bg-gray-800 rounded-xl overflow-hidden shadow-xl border border-gray-700 transition-all duration-300 relative" data-category="nlp">
+                    <div class="citation-badge">28</div>
+                    <div class="bg-blue-900 p-4">
+                        <span class="text-xs font-semibold bg-blue-600 text-white px-2 py-1 rounded">ICIEM 2021</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Transformer-Based Architecture for Enhanced Response Coherence</h3>
+                        <p class="text-gray-400 mb-4">
+                            <span class="font-semibold">Authors:</span> Shubham Chakraborty, John Smith, Maria Rodriguez
+                        </p>
+                        <p class="text-gray-300 mb-4">
+                            This paper introduces a modified transformer architecture that significantly improves response coherence 
+                            in conversational AI systems. We propose a novel attention mechanism that maintains contextual relevance across 
+                            multiple turns of conversation, resulting in more natural and consistent dialogue generation.
+                        </p>
+                        <div class="flex items-center text-sm text-gray-400 mb-6">
+                            <span class="inline-block bg-gray-700 px-2 py-1 rounded mr-2">Transformers</span>
+                            <span class="inline-block bg-gray-700 px-2 py-1 rounded mr-2">NLP</span>
+                            <span class="inline-block bg-gray-700 px-2 py-1 rounded">Dialogue Systems</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-blue-400">DOI: 10.1109/ICIEM51511.2021.9445354</span>
+                            <a href="#" class="text-white bg-blue-600 px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                Read Paper
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Publication 2 -->
+                <div class="publication-card bg-gray-800 rounded-xl overflow-hidden shadow-xl border border-gray-700 transition-all duration-300 relative" data-category="environmental">
+                    <div class="citation-badge">15</div>
+                    <div class="bg-green-900 p-4">
+                        <span class="text-xs font-semibold bg-green-600 text-white px-2 py-1 rounded">ICBDS 2022</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Carbon Automated AI Emission Monitoring System</h3>
+                        <p class="text-gray-400 mb-4">
+                            <span class="font-semibold">Authors:</span> Shubham Chakraborty, Alex Johnson, Sarah Chen
+                        </p>
+                        <p class="text-gray-300 mb-4">
+                            This research presents an IoT-based system for automated carbon emission monitoring using AI techniques. 
+                            We demonstrate how machine learning models can be deployed on edge devices to monitor emissions in real-time, 
+                            with data verification through blockchain technology for regulatory compliance.
+                        </p>
+                        <div class="flex items-center text-sm text-gray-400 mb-6">
+                            <span class="inline-block bg-gray-700 px-2 py-1 rounded mr-2">IoT</span>
+                            <span class="inline-block bg-gray-700 px-2 py-1 rounded mr-2">Carbon Emissions</span>
+                            <span class="inline-block bg-gray-700 px-2 py-1 rounded">Blockchain</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-blue-400">DOI: 10.1109/ICBDS53701.2022.9935979</span>
+                            <a href="#" class="text-white bg-green-600 px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                Read Paper
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Publication 3 (Under Review) -->
+                <div class="publication-card bg-gray-800 rounded-xl overflow-hidden shadow-xl border border-gray-700 transition-all duration-300" data-category="nlp">
+                    <div class="bg-purple-900 p-4">
+                        <span class="text-xs font-semibold bg-purple-600 text-white px-2 py-1 rounded">ICML 2025 (Under Review)</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Predicting Emergent Capabilities in Large Language Models</h3>
+                        <p class="text-gray-400 mb-4">
+                            <span class="font-semibold">Authors:</span> Shubham Chakraborty, David Williams, Lisa Patel, Robert Chen
+                        </p>
+                        <p class="text-gray-300 mb-4">
+                            This paper introduces a novel framework for quantifying and predicting emergent capabilities in large 
+                            language models (LLMs) across different parameter scales. Using our proposed E-manifold metrics, we can 
+                            predict capability emergence with 87% accuracy, significantly outperforming existing methods while reducing 
+                            computational requirements for evaluation.
+                        </p>
+                        <div class="flex items-center text-sm text-gray-400 mb-6">
+                            <span class="inline-block bg-gray-700 px-2 py-1 rounded mr-2">Large Language Models</span>
+                            <span class="inline-block bg-gray-700 px-2 py-1 rounded mr-2">Emergent Capabilities</span>
+                            <span class="inline-block bg-gray-700 px-2 py-1 rounded">Scaling Laws</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-blue-400">Preprint: arXiv:2405.00000</span>
+                            <a href="#" class="text-white bg-purple-600 px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                                Read Preprint
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Publication 4 -->
+                <div class="publication-card bg-gray-800 rounded-xl overflow-hidden shadow-xl border border-gray-700 transition-all duration-300 relative" data-category="environmental">
+                    <div class="citation-badge">8</div>
+                    <div class="bg-yellow-900 p-4">
+                        <span class="text-xs font-semibold bg-yellow-600 text-white px-2 py-1 rounded">JEI 2023</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Automated Data Pipeline Architecture for ESG Reporting</h3>
+                        <p class="text-gray-400 mb-4">
+                            <span class="font-semibold">Authors:</span> Shubham Chakraborty, Michael Brown
+                        </p>
+                        <p class="text-gray-300 mb-4">
+                            This paper presents an efficient automated data pipeline architecture for Environmental, Social, and 
+                            Governance (ESG) reporting. We propose a system that integrates disparate environmental data sources, 
+                            performs automated validation and transformation, and generates standardized reports for regulatory compliance.
+                        </p>
+                        <div class="flex items-center text-sm text-gray-400 mb-6">
+                            <span class="inline-block bg-gray-700 px-2 py-1 rounded mr-2">ESG Reporting</span>
+                            <span class="inline-block bg-gray-700 px-2 py-1 rounded mr-2">Data Pipeline</span>
+                            <span class="inline-block bg-gray-700 px-2 py-1 rounded">Environmental Informatics</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-blue-400">DOI: 10.1016/j.envsoft.2023.105461</span>
+                            <a href="#" class="text-white bg-yellow-600 px-4 py-2 rounded-lg hover:bg-yellow-700 transition-colors">
+                                Read Paper
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Publication 5 (Under Review) -->
+                <div class="publication-card bg-gray-800 rounded-xl overflow-hidden shadow-xl border border-gray-700 transition-all duration-300" data-category="multimodal">
+                    <div class="bg-red-900 p-4">
+                        <span class="text-xs font-semibold bg-red-600 text-white px-2 py-1 rounded">CVPR 2025 (Under Review)</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Cross-Modal Fusion Mechanism for Zero-Shot Visual Reasoning</h3>
+                        <p class="text-gray-400 mb-4">
+                            <span class="font-semibold">Authors:</span> Shubham Chakraborty, Jennifer Wu, Thomas Reeves
+                        </p>
+                        <p class="text-gray-300 mb-4">
+                            This paper introduces a novel cross-modal fusion architecture that integrates Vision Transformer (ViT) 
+                            representations with language embeddings for improved zero-shot visual reasoning. Our approach achieves 
+                            state-of-the-art performance on multiple benchmarks by utilizing a custom attention mechanism that 
+                            maintains contextual alignment between modalities.
+                        </p>
+                        <div class="flex items-center text-sm text-gray-400 mb-6">
+                            <span class="inline-block bg-gray-700 px-2 py-1 rounded mr-2">Multimodal Learning</span>
+                            <span class="inline-block bg-gray-700 px-2 py-1 rounded mr-2">Vision Transformer</span>
+                            <span class="inline-block bg-gray-700 px-2 py-1 rounded">Zero-Shot Learning</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-blue-400">Preprint: arXiv:2405.00001</span>
+                            <a href="#" class="text-white bg-red-600 px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">
+                                Read Preprint
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Conference Presentations -->
+            <h2 class="text-3xl font-bold mt-20 mb-10">
+                Conference <span class="gradient-text">Presentations</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Presentation 1 -->
+                <div class="bg-gray-800 rounded-xl overflow-hidden shadow-xl border border-gray-700 transition-all duration-300 hover:transform hover:-translate-y-2">
+                    <div class="p-6">
+                        <div class="text-blue-400 mb-2">
+                            <i class="fas fa-chalkboard-teacher mr-2"></i> Oral Presentation
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">ISBI 2024 Conference</h3>
+                        <p class="text-gray-300 mb-4">
+                            "Advanced U-Net Architecture for Medical Image Segmentation with Transformer Enhancements"
+                        </p>
+                        <p class="text-gray-400">
+                            April 15-17, 2024 • Boston, USA
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Presentation 2 -->
+                <div class="bg-gray-800 rounded-xl overflow-hidden shadow-xl border border-gray-700 transition-all duration-300 hover:transform hover:-translate-y-2">
+                    <div class="p-6">
+                        <div class="text-purple-400 mb-2">
+                            <i class="fas fa-laptop-code mr-2"></i> Workshop
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">NeurIPS LLM Workshop</h3>
+                        <p class="text-gray-300 mb-4">
+                            "Predicting and Measuring Emergent Capabilities in Large Language Models"
+                        </p>
+                        <p class="text-gray-400">
+                            December 5, 2024 • New Orleans, USA
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Presentation 3 -->
+                <div class="bg-gray-800 rounded-xl overflow-hidden shadow-xl border border-gray-700 transition-all duration-300 hover:transform hover:-translate-y-2">
+                    <div class="p-6">
+                        <div class="text-green-400 mb-2">
+                            <i class="fas fa-image mr-2"></i> Poster Presentation
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">ICLR 2023 Conference</h3>
+                        <p class="text-gray-300 mb-4">
+                            "Efficient Multimodal Systems for Low-Resource Applications"
+                        </p>
+                        <p class="text-gray-400">
+                            May 1-5, 2023 • Kigali, Rwanda
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-8 md:mb-0">
+                    <h3 class="text-2xl font-bold mb-2">Shubham Chakraborty</h3>
+                    <p class="text-gray-400 max-w-md">
+                        AI/ML Researcher focused on advancing LLM capabilities, multimodal systems, and medical imaging analysis.
+                    </p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://github.com/enigma-kun" target="_blank" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-github text-2xl"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/shubham-chakraborty" target="_blank" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-linkedin text-2xl"></i>
+                    </a>
+                    <a href="https://scholar.google.com" target="_blank" class="text-gray-400 hover:text-white">
+                        <i class="fas fa-graduation-cap text-2xl"></i>
+                    </a>
+                    <a href="mailto:chakraborty.shubham007@gmail.com" class="text-gray-400 hover:text-white">
+                        <i class="fas fa-envelope text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">
+                    &copy; 2025 Shubham Chakraborty. All rights reserved.
+                </p>
+                <div class="flex space-x-8">
+                    <a href="index.html" class="text-gray-400 hover:text-white text-sm">Home</a>
+                    <a href="research.html" class="text-gray-400 hover:text-white text-sm">Research</a>
+                    <a href="publications.html" class="text-gray-400 hover:text-white text-sm">Publications</a>
+                    <a href="experience.html" class="text-gray-400 hover:text-white text-sm">Experience</a>
+                    <a href="contact.html" class="text-gray-400 hover:text-white text-sm">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Citation chart
+            const ctx = document.getElementById('citation-chart').getContext('2d');
+            const citationChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['2021', '2022', '2023', '2024', '2025 (Projected)'],
+                    datasets: [{
+                        label: 'Citations',
+                        data: [5, 18, 32, 43, 65],
+                        backgroundColor: 'rgba(79, 70, 229, 0.2)',
+                        borderColor: 'rgba(79, 70, 229, 1)',
+                        borderWidth: 3,
+                        tension: 0.4,
+                        pointBackgroundColor: 'rgba(79, 70, 229, 1)',
+                        pointBorderColor: '#fff',
+                        pointRadius: 6,
+                        pointHoverRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: 'rgba(255, 255, 255, 0.8)'
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.8)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.8)'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Publication filtering
+            const filterButtons = document.querySelectorAll('.pub-filter-btn');
+            const publicationCards = document.querySelectorAll('.publication-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('bg-blue-600');
+                        btn.classList.add('bg-gray-800');
+                    });
+                    
+                    // Add active class to clicked button
+                    button.classList.remove('bg-gray-800');
+                    button.classList.add('bg-blue-600');
+                    
+                    const filter = button.dataset.filter;
+                    
+                    // Show all or filter publications
+                    if (filter === 'all') {
+                        publicationCards.forEach(card => {
+                            card.style.display = 'block';
+                        });
+                    } else {
+                        publicationCards.forEach(card => {
+                            if (card.dataset.category === filter) {
+                                card.style.display = 'block';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

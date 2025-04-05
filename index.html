@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shubham Chakraborty | AI Research Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .gradient-text {
+            background-image: linear-gradient(45deg, #4F46E5, #EC4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .neural-bg {
+            background-image: url('https://cdn.pixabay.com/photo/2020/06/21/19/12/networks-5326402_1280.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .research-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full bg-gray-900 bg-opacity-90 backdrop-filter backdrop-blur-lg z-50 border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold">Shubham Chakraborty</a>
+            <div class="hidden md:flex space-x-10">
+                <a href="research.html" class="hover:text-blue-400 transition-colors">Research</a>
+                <a href="publications.html" class="hover:text-blue-400 transition-colors">Publications</a>
+                <a href="experience.html" class="hover:text-blue-400 transition-colors">Experience</a>
+                <a href="contact.html" class="hover:text-blue-400 transition-colors">Contact</a>
+            </div>
+            <div class="flex space-x-4">
+                <a href="https://github.com/enigma-kun" target="_blank" class="text-gray-400 hover:text-white">
+                    <i class="fab fa-github text-xl"></i>
+                </a>
+                <a href="https://linkedin.com/in/shubham-chakraborty" target="_blank" class="text-gray-400 hover:text-white">
+                    <i class="fab fa-linkedin text-xl"></i>
+                </a>
+                <a href="https://scholar.google.com" target="_blank" class="text-gray-400 hover:text-white">
+                    <i class="fas fa-graduation-cap text-xl"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen neural-bg pt-32 pb-20 px-6 flex items-center relative">
+        <div class="absolute inset-0 bg-gray-900 bg-opacity-80"></div>
+        <div class="container mx-auto relative z-10">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-12 lg:mb-0">
+                    <h1 class="text-5xl font-bold leading-tight mb-6">
+                        Contributing to <span class="gradient-text">AGI</span> through Advanced ML Research
+                    </h1>
+                    <p class="text-xl text-gray-300 mb-8">
+                        AI researcher focused on LLM capability analysis, multimodal systems, and medical imaging analysis with publications in top-tier conferences.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="research.html" class="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-lg">
+                            View Research
+                        </a>
+                        <a href="publications.html" class="px-6 py-3 bg-gray-800 text-white font-medium rounded-lg hover:bg-gray-700 transition-colors">
+                            View Publications
+                        </a>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 flex justify-center">
+                    <div class="relative">
+                        <img src="https://avataaars.io/?avatarStyle=Circle&topType=ShortHairShortWaved&accessoriesType=Blank&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=Blue03&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light" 
+                             alt="Avatar" 
+                             class="w-64 h-64 rounded-full border-4 border-blue-600 shadow-xl">
+                        <div class="absolute -top-4 -right-4 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                            <i class="fas fa-brain text-white text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Animated stats -->
+            <div class="mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-gray-800 bg-opacity-80 p-6 rounded-xl border border-gray-700">
+                    <div class="text-4xl font-bold text-blue-500 mb-2 counter" data-target="4">0</div>
+                    <div class="text-xl font-medium">Research Papers</div>
+                    <p class="text-gray-400 mt-2">Published in prestigious conferences and journals</p>
+                </div>
+                <div class="bg-gray-800 bg-opacity-80 p-6 rounded-xl border border-gray-700">
+                    <div class="text-4xl font-bold text-green-500 mb-2 counter" data-target="9">0</div>
+                    <div class="text-xl font-medium">Hackathon Wins</div>
+                    <p class="text-gray-400 mt-2">First place victories in competitive AI/ML hackathons</p>
+                </div>
+                <div class="bg-gray-800 bg-opacity-80 p-6 rounded-xl border border-gray-700">
+                    <div class="text-4xl font-bold text-yellow-500 mb-2">$<span class="counter" data-target="29">0</span>K</div>
+                    <div class="text-xl font-medium">Prize Money</div>
+                    <p class="text-gray-400 mt-2">Total prize money from competitions and hackathons</p>
+                </div>
+                <div class="bg-gray-800 bg-opacity-80 p-6 rounded-xl border border-gray-700">
+                    <div class="text-4xl font-bold text-purple-500 mb-2 counter" data-target="1">0</div>
+                    <div class="text-xl font-medium">Startup Exit</div>
+                    <p class="text-gray-400 mt-2">Successful exit from Emitrix, an AI monitoring platform</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Focus Section -->
+    <section class="py-20 px-6 bg-gray-900">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-16 text-center">
+                <span class="gradient-text">Research Focus Areas</span>
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- Research Network Visualization (D3.js) -->
+                <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                    <h3 class="text-2xl font-bold mb-4">Research Network</h3>
+                    <p class="text-gray-300 mb-6">
+                        My research spans multiple domains in AI with a focus on contributing to AGI advancement.
+                        Explore the interconnections between my research areas.
+                    </p>
+                    <div id="research-network" class="w-full h-80 bg-gray-900 rounded-lg">
+                        <!-- D3.js visualization will go here -->
+                    </div>
+                </div>
+
+                <!-- Research Areas -->
+                <div class="grid grid-cols-1 gap-6">
+                    <div class="research-card bg-gradient-to-r from-blue-900 to-indigo-900 rounded-xl p-6 transition-all duration-300">
+                        <h3 class="text-xl font-bold mb-2">LLM Capability Analysis</h3>
+                        <p class="text-gray-300">
+                            Developed a framework for quantifying emergent capability thresholds across LLM architectures (7B-72B), 
+                            achieving 87% prediction accuracy using novel E-manifold metrics.
+                        </p>
+                    </div>
+                    <div class="research-card bg-gradient-to-r from-teal-900 to-emerald-900 rounded-xl p-6 transition-all duration-300">
+                        <h3 class="text-xl font-bold mb-2">Multimodal Learning</h3>
+                        <p class="text-gray-300">
+                            Architected cross-modal fusion system integrating ViT image encodings with BERT text embeddings, 
+                            achieving 85% accuracy on zero-shot multimodal reasoning tasks.
+                        </p>
+                    </div>
+                    <div class="research-card bg-gradient-to-r from-red-900 to-rose-900 rounded-xl p-6 transition-all duration-300">
+                        <h3 class="text-xl font-bold mb-2">Medical Image Analysis</h3>
+                        <p class="text-gray-300">
+                            Processed over 3,000 medical images with U-Net architecture and transformer enhancements, 
+                            achieving top 15% ranking in ISBI Challenge.
+                        </p>
+                    </div>
+                    <div class="research-card bg-gradient-to-r from-amber-900 to-orange-900 rounded-xl p-6 transition-all duration-300">
+                        <h3 class="text-xl font-bold mb-2">RAG Systems</h3>
+                        <p class="text-gray-300">
+                            Built comprehensive RAG system combining vector databases with fine-tuned LLMs, 
+                            achieving 78% improvement in answer accuracy and reducing hallucinations by 65%.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section class="py-20 px-6 bg-gray-950">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-16 text-center">
+                <span class="gradient-text">Featured Publications</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="bg-gray-800 rounded-xl overflow-hidden shadow-xl">
+                    <div class="bg-blue-900 p-4">
+                        <span class="text-xs font-semibold bg-blue-600 text-white px-2 py-1 rounded">ICIEM 2021</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Transformer-Based Architecture for Enhanced Response Coherence</h3>
+                        <p class="text-gray-400 mb-4">
+                            <span class="font-semibold">Authors:</span> Shubham Chakraborty, et al.
+                        </p>
+                        <p class="text-gray-300 mb-4">
+                            This paper introduces a modified transformer architecture that significantly improves response coherence 
+                            in conversational AI systems, achieving 42% improvement in contextual relevance.
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-blue-400">DOI: 10.1109/ICIEM51511.2021.9445354</span>
+                            <a href="#" class="text-white bg-blue-600 px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                Read Paper
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800 rounded-xl overflow-hidden shadow-xl">
+                    <div class="bg-green-900 p-4">
+                        <span class="text-xs font-semibold bg-green-600 text-white px-2 py-1 rounded">ICBDS 2022</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Carbon Automated AI Emission Monitoring System</h3>
+                        <p class="text-gray-400 mb-4">
+                            <span class="font-semibold">Authors:</span> Shubham Chakraborty, et al.
+                        </p>
+                        <p class="text-gray-300 mb-4">
+                            This research presents an IoT-based system for automated carbon emission monitoring using AI techniques,
+                            reducing monitoring costs by 35% while improving accuracy by 28%.
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-blue-400">DOI: 10.1109/ICBDS53701.2022.9935979</span>
+                            <a href="#" class="text-white bg-green-600 px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                Read Paper
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10 text-center">
+                <a href="publications.html" class="inline-block px-6 py-3 bg-gray-800 text-white font-medium rounded-lg hover:bg-gray-700 transition-colors">
+                    View All Publications
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Assistant Section -->
+    <section class="py-20 px-6 bg-gradient-to-b from-gray-900 to-indigo-900">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-8 text-center">
+                <span class="gradient-text">Research Assistant AI</span>
+            </h2>
+            <p class="text-xl text-center text-gray-300 mb-12 max-w-3xl mx-auto">
+                Interact with my custom AI assistant to learn about my research in a conversational format.
+                Ask questions about my publications, methodologies, and technical expertise.
+            </p>
+            
+            <div class="bg-gray-800 bg-opacity-80 rounded-xl overflow-hidden shadow-2xl max-w-4xl mx-auto border border-gray-700">
+                <div class="bg-gray-700 p-4 flex items-center">
+                    <div class="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                    <div class="flex-grow text-center text-sm font-medium">Research Assistant AI</div>
+                </div>
+                <div id="chat-container" class="h-80 overflow-y-auto p-4">
+                    <div class="mb-4">
+                        <div class="text-xs text-gray-400 mb-1">AI Assistant</div>
+                        <div class="bg-gray-700 p-3 rounded-lg inline-block max-w-md">
+                            Hello! I'm Shubham's Research Assistant. I can explain his work on LLM capability analysis, 
+                            multimodal systems, or help you navigate his portfolio. What would you like to know about?
+                        </div>
+                    </div>
+                    <!-- User can add more messages here -->
+                </div>
+                <div class="p-4 border-t border-gray-700 bg-gray-800">
+                    <div class="flex">
+                        <input type="text" id="user-input" placeholder="Ask about my research, publications, or experience..." 
+                               class="flex-grow bg-gray-700 text-white rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <button id="send-button" class="bg-blue-600 text-white px-4 py-2 rounded-r-lg hover:bg-blue-700 transition-colors">
+                            Send
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Skills Section -->
+    <section class="py-20 px-6 bg-gray-900">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-16 text-center">
+                <span class="gradient-text">Technical Expertise</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <!-- Skills Radar Chart -->
+                <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                    <h3 class="text-2xl font-bold mb-6">Skills Radar</h3>
+                    <canvas id="skills-radar" width="400" height="400"></canvas>
+                </div>
+                
+                <!-- Technical Skills Lists -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                        <h3 class="text-xl font-bold mb-4 text-blue-400">
+                            <i class="fas fa-brain mr-2"></i> AI/ML
+                        </h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                                PyTorch
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                                TensorFlow
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                                Transformers / HuggingFace
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                                BERT / GPT / LLaMA
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                                CUDA
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                                RAG / Fine-tuning
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                        <h3 class="text-xl font-bold mb-4 text-green-400">
+                            <i class="fas fa-code mr-2"></i> NLP/CV
+                        </h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                                Large Language Models
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                                Embeddings
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                                Text Classification
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                                Computer Vision
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                                Prompt Engineering
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                                Information Retrieval
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                        <h3 class="text-xl font-bold mb-4 text-yellow-400">
+                            <i class="fas fa-cloud mr-2"></i> Data/Cloud
+                        </h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-yellow-500 rounded-full mr-2"></div>
+                                AWS (Bedrock, S3)
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-yellow-500 rounded-full mr-2"></div>
+                                Docker
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-yellow-500 rounded-full mr-2"></div>
+                                PySpark
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-yellow-500 rounded-full mr-2"></div>
+                                Pandas
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-yellow-500 rounded-full mr-2"></div>
+                                MLflow
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-yellow-500 rounded-full mr-2"></div>
+                                SQL, Git, FastAPI
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                        <h3 class="text-xl font-bold mb-4 text-purple-400">
+                            <i class="fas fa-project-diagram mr-2"></i> Publications & Awards
+                        </h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full mr-2"></div>
+                                4 Peer-reviewed Papers
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full mr-2"></div>
+                                DOI: 10.1109/ICIEM51511.2021.9445354
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full mr-2"></div>
+                                DOI: 10.1109/ICBDS53701.2022.9935979
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full mr-2"></div>
+                                9 Hackathon Wins
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full mr-2"></div>
+                                Kaggle Expert Tier
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full mr-2"></div>
+                                NASA Lucy Mission AI Ambassador
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-8 md:mb-0">
+                    <h3 class="text-2xl font-bold mb-2">Shubham Chakraborty</h3>
+                    <p class="text-gray-400 max-w-md">
+                        AI/ML Researcher focused on advancing LLM capabilities, multimodal systems, and medical imaging analysis.
+                    </p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://github.com/enigma-kun" target="_blank" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-github text-2xl"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/shubham-chakraborty" target="_blank" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-linkedin text-2xl"></i>
+                    </a>
+                    <a href="https://scholar.google.com" target="_blank" class="text-gray-400 hover:text-white">
+                        <i class="fas fa-graduation-cap text-2xl"></i>
+                    </a>
+                    <a href="mailto:chakraborty.shubham007@gmail.com" class="text-gray-400 hover:text-white">
+                        <i class="fas fa-envelope text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">
+                    &copy; 2025 Shubham Chakraborty. All rights reserved.
+                </p>
+                <div class="flex space-x-8">
+                    <a href="index.html" class="text-gray-400 hover:text-white text-sm">Home</a>
+                    <a href="research.html" class="text-gray-400 hover:text-white text-sm">Research</a>
+                    <a href="publications.html" class="text-gray-400 hover:text-white text-sm">Publications</a>
+                    <a href="experience.html" class="text-gray-400 hover:text-white text-sm">Experience</a>
+                    <a href="contact.html" class="text-gray-400 hover:text-white text-sm">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Counter animation
+        const counters = document.querySelectorAll('.counter');
+        
+        counters.forEach(counter => {
+            const target = parseInt(counter.getAttribute('data-target'));
+            const duration = 2000; // 2 seconds
+            const stepTime = 50;
+            const steps = duration / stepTime;
+            const increment = target / steps;
+            
+            let current = 0;
+            const timer = setInterval(() => {
+                current += increment;
+                counter.innerText = Math.ceil(current);
+                
+                if (current >= target) {
+                    counter.innerText = target;
+                    clearInterval(timer);
+                }
+            }, stepTime);
+        });
+
+        // Research Network Visualization (D3.js)
+        document.addEventListener('DOMContentLoaded', function() {
+            const networkContainer = document.getElementById('research-network');
+            const width = networkContainer.clientWidth;
+            const height = networkContainer.clientHeight;
+            
+            // Create SVG
+            const svg = d3.select('#research-network').append('svg')
+                .attr('width', width)
+                .attr('height', height);
+            
+            // Data
+            const nodes = [
+                { id: 'agi', name: 'AGI', color: '#3b82f6', size: 25 },
+                { id: 'llm', name: 'LLM', color: '#4f46e5', size: 20 },
+                { id: 'multimodal', name: 'Multimodal', color: '#10b981', size: 20 },
+                { id: 'medical', name: 'Medical', color: '#ef4444', size: 20 },
+                { id: 'rag', name: 'RAG', color: '#f59e0b', size: 20 }
+            ];
+            
+            const links = [
+                { source: 'agi', target: 'llm' },
+                { source: 'agi', target: 'multimodal' },
+                { source: 'agi', target: 'medical' },
+                { source: 'agi', target: 'rag' },
+                { source: 'llm', target: 'rag' },
+                { source: 'multimodal', target: 'medical' }
+            ];
+            
+            // Create simulation
+            const simulation = d3.forceSimulation(nodes)
+                .force('link', d3.forceLink(links).id(d => d.id).distance(100))
+                .force('charge', d3.forceManyBody().strength(-400))
+                .force('center', d3.forceCenter(width / 2, height / 2));
+            
+            // Create links
+            const link = svg.append('g')
+                .selectAll('line')
+                .data(links)
+                .enter().append('line')
+                .attr('stroke', '#6b7280')
+                .attr('stroke-opacity', 0.6)
+                .attr('stroke-width', 2);
+            
+            // Create nodes
+            const node = svg.append('g')
+                .selectAll('circle')
+                .data(nodes)
+                .enter().append('circle')
+                .attr('r', d => d.size)
+                .attr('fill', d => d.color)
+                .attr('stroke', '#fff')
+                .attr('stroke-width', 2)
+                .call(d3.drag()
+                    .on('start', dragstarted)
+                    .on('drag', dragged)
+                    .on('end', dragended));
+            
+            // Node labels
+            const label = svg.append('g')
+                .selectAll('text')
+                .data(nodes)
+                .enter().append('text')
+                .text(d => d.name)
+                .attr('font-size', 10)
+                .attr('dx', 15)
+                .attr('dy', 4)
+                .attr('fill', '#fff');
+            
+            // Simulation tick
+            simulation.on('tick', () => {
+                link
+                    .attr('x1', d => d.source.x)
+                    .attr('y1', d => d.source.y)
+                    .attr('x2', d => d.target.x)
+                    .attr('y2', d => d.target.y);
+                
+                node
+                    .attr('cx', d => d.x)
+                    .attr('cy', d => d.y);
+                
+                label
+                    .attr('x', d => d.x)
+                    .attr('y', d => d.y);
+            });
+            
+            // Drag functions
+            function dragstarted(event, d) {
+                if (!event.active) simulation.alphaTarget(0.3).restart();
+                d.fx = d.x;
+                d.fy = d.y;
+            }
+            
+            function dragged(event, d) {
+                d.fx = event.x;
+                d.fy = event.y;
+            }
+            
+            function dragended(event, d) {
+                if (!event.active) simulation.alphaTarget(0);
+                d.fx = null;
+                d.fy = null;
+            }
+        });
+
+        // Skills radar chart
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('skills-radar').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        'Deep Learning', 
+                        'Natural Language Processing', 
+                        'Computer Vision', 
+                        'MLOps',
+                        'Data Engineering',
+                        'Cloud Computing'
+                    ],
+                    datasets: [{
+                        label: 'Technical Proficiency',
+                        data: [95, 90, 85, 80, 75, 85],
+                        backgroundColor: 'rgba(79, 70, 229, 0.2)',
+                        borderColor: 'rgba(79, 70, 229, 1)',
+                        pointBackgroundColor: 'rgba(79, 70, 229, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(79, 70, 229, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: 'rgba(255, 255, 255, 0.2)'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.2)'
+                            },
+                            pointLabels: {
+                                color: 'rgba(255, 255, 255, 0.8)',
+                                font: {
+                                    size: 12
+                                }
+                            },
+                            ticks: {
+                                backdropColor: 'transparent',
+                                color: 'rgba(255, 255, 255, 0.6)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: 'rgba(255, 255, 255, 0.8)'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // Research Assistant Chat
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatContainer = document.getElementById('chat-container');
+            const userInput = document.getElementById('user-input');
+            const sendButton = document.getElementById('send-button');
+            
+            const researchKnowledge = {
+                'llm': {
+                    'title': 'LLM Capability Analysis',
+                    'description': 'Framework for quantifying emergent capability thresholds across LLM architectures (7B-72B), achieving 87% prediction accuracy using novel E-manifold metrics.',
+                    'methods': 'Transformer architecture analysis, E-manifold metric development, Cross-scale performance measurement',
+                    'results': 'Uncovered previously unobserved scaling laws for reasoning tasks, outperforming standard evaluation approaches by 35% with 42% reduced computation cost.'
+                },
+                'multimodal': {
+                    'title': 'Multimodal Learning',
+                    'description': 'Cross-modal fusion system integrating ViT image encodings with BERT text embeddings.',
+                    'methods': 'Vision Transformer implementation, CLIP-based representation learning, Custom attention mechanism for contextual alignment',
+                    'results': 'Achieved 85% accuracy on zero-shot multimodal reasoning tasks with minimal supervision.'
+                },
+                'medical': {
+                    'title': 'Medical Image Analysis',
+                    'description': 'U-Net architecture with transformer enhancements for medical image segmentation.',
+                    'methods': 'Transfer learning approach, Adaptive augmentation pipeline, Anatomical consistency enforcement',
+                    'results': 'Top 15% ranking in ISBI Challenge with 92% segmentation accuracy and 60% reduction in false positives.'
+                },
+                'rag': {
+                    'title': 'Retrieval-Augmented Generation',
+                    'description': 'Comprehensive RAG system combining vector databases with fine-tuned LLMs.',
+                    'methods': 'Advanced prompt engineering, Context window optimization, Vector database integration',
+                    'results': '78% improvement in answer accuracy and 65% reduction in hallucinations for academic information retrieval.'
+                }
+            };
+            
+            function addMessage(role, content) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'mb-4';
+                
+                const roleDiv = document.createElement('div');
+                roleDiv.className = 'text-xs text-gray-400 mb-1';
+                roleDiv.textContent = role === 'user' ? 'You' : 'AI Assistant';
+                
+                const contentDiv = document.createElement('div');
+                contentDiv.className = role === 'user' 
+                    ? 'bg-blue-600 p-3 rounded-lg inline-block max-w-md ml-auto' 
+                    : 'bg-gray-700 p-3 rounded-lg inline-block max-w-md';
+                contentDiv.innerHTML = content;
+                
+                messageDiv.appendChild(roleDiv);
+                messageDiv.appendChild(contentDiv);
+                
+                chatContainer.appendChild(messageDiv);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+            
+            function generateResponse(query) {
+                const queryLower = query.toLowerCase();
+                
+                if (queryLower.includes('llm') || queryLower.includes('capability')) {
+                    const data = researchKnowledge['llm'];
+                    return `<strong>${data.title}</strong><br><br>${data.description}<br><br><strong>Methods:</strong> ${data.methods}<br><br><strong>Results:</strong> ${data.results}`;
+                } 
+                else if (queryLower.includes('multimodal') || queryLower.includes('vision')) {
+                    const data = researchKnowledge['multimodal'];
+                    return `<strong>${data.title}</strong><br><br>${data.description}<br><br><strong>Methods:</strong> ${data.methods}<br><br><strong>Results:</strong> ${data.results}`;
+                }
+                else if (queryLower.includes('medical') || queryLower.includes('image')) {
+                    const data = researchKnowledge['medical'];
+                    return `<strong>${data.title}</strong><br><br>${data.description}<br><br><strong>Methods:</strong> ${data.methods}<br><br><strong>Results:</strong> ${data.results}`;
+                }
+                else if (queryLower.includes('rag') || queryLower.includes('retrieval')) {
+                    const data = researchKnowledge['rag'];
+                    return `<strong>${data.title}</strong><br><br>${data.description}<br><br><strong>Methods:</strong> ${data.methods}<br><br><strong>Results:</strong> ${data.results}`;
+                }
+                else if (queryLower.includes('publication') || queryLower.includes('paper')) {
+                    return `<strong>Publications</strong><br><br>Shubham has published 4 peer-reviewed papers:<br><br>1. "Transformer-Based Architecture for Enhanced Response Coherence" (2021)<br>DOI: 10.1109/ICIEM51511.2021.9445354<br><br>2. "Carbon Automated AI Emission Monitoring System" (2022)<br>DOI: 10.1109/ICBDS53701.2022.9935979<br><br>3. "Predicting Emergent Capabilities in LLMs" (under review for ICML 2025)<br><br>4. "Automated Data Pipeline Architecture for ESG Reporting" (2023)`;
+                }
+                else if (queryLower.includes('experience') || queryLower.includes('work')) {
+                    return `<strong>Work Experience</strong><br><br>- AI Research Assistant at Arizona State University (2025)<br>- Machine Learning Engineer Intern at Nexus Info (2024)<br>- Full Stack Developer Intern at Varcons Technologies (2023)<br>- Founder at Emitrix (Successful Exit)<br><br>Shubham has also won 9 hackathons totaling $29K in prize money and is a Kaggle Expert with 2 NLP competition medals.`;
+                }
+                else {
+                    return `I'm programmed with knowledge about Shubham's research in LLM capabilities, multimodal systems, medical imaging, and RAG systems. I can also tell you about his publications and experience. What would you like to know more about?`;
+                }
+            }
+            
+            sendButton.addEventListener('click', function() {
+                const query = userInput.value.trim();
+                if (query) {
+                    addMessage('user', query);
+                    
+                    // Simulate AI thinking
+                    setTimeout(() => {
+                        const response = generateResponse(query);
+                        addMessage('assistant', response);
+                    }, 800);
+                    
+                    userInput.value = '';
+                }
+            });
+            
+            userInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendButton.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
