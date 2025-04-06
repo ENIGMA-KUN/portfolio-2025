@@ -1,9 +1,4 @@
 @import "tailwindcss";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap');
-
 :root {
   --foreground-rgb: 18, 18, 18;
   --background-start-rgb: 248, 250, 252;
@@ -28,59 +23,4 @@ body {
     rgb(var(--background-start-rgb));
   font-family: 'Inter', sans-serif;
 }
-
-.blueprint-bg {
-  background-image: 
-    linear-gradient(rgba(65, 105, 225, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(65, 105, 225, 0.05) 1px, transparent 1px);
-  background-size: 20px 20px;
-}
-
-.code-text {
-  font-family: 'Fira Code', monospace;
-}
-
-.glow {
-  box-shadow: 0 0 10px rgba(109, 40, 217, 0.5);
-}
-
-.glow-hover:hover {
-  box-shadow: 0 0 15px rgba(109, 40, 217, 0.7);
-  transition: box-shadow 0.3s ease;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgb(var(--background-start-rgb));
-}
-
-::-webkit-scrollbar-thumb {
-  background: #6D28D9;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #4C1D95;
-}
-
-@layer components {
-  .nav-link {
-    @apply px-4 py-2 text-sm font-medium transition-colors hover:text-primary;
-  }
-  
-  .btn-primary {
-    @apply px-6 py-2 font-medium text-white bg-primary rounded-md transition-all hover:bg-blue-600 hover:shadow-lg;
-  }
-  
-  .section-title {
-    @apply text-3xl font-bold mb-8 text-center;
-  }
-  
-  .card {
-    @apply bg-white dark:bg-dark rounded-lg p-6 shadow-md transition-all hover:shadow-lg;
-  }
-}
+/* Copy any other custom CSS you had in your file */
