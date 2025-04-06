@@ -24,36 +24,38 @@ export default function HeroSection() {
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Neural Network Background */}
-      <BackgroundAnimation />
+      <div className="absolute inset-0 z-0">
+        <BackgroundAnimation />
+      </div>
       
       {/* Singularity Image */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none">
+      <div className="absolute inset-0 flex items-center justify-center opacity-60 pointer-events-none z-[1]">
         <Image
           src="/images/singularity.png"
           alt="AI and Human Connection"
-          width={800}
-          height={600}
-          className="object-contain"
+          width={1200}
+          height={900}
+          className="object-contain mix-blend-lighten"
           priority
         />
       </div>
       
       {/* Content */}
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 relative z-[2]">
         <div className="max-w-4xl mx-auto text-center">
           {/* Profile Picture */}
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
-            className="mb-8"
+            className="mb-12"
           >
-            <div className="w-40 h-40 mx-auto rounded-full border-4 border-primary/50 overflow-hidden bg-gray-800/50 backdrop-blur-sm shadow-glow">
+            <div className="w-48 h-48 mx-auto rounded-full border-4 border-primary/50 overflow-hidden bg-dark/30 backdrop-blur-sm shadow-glow">
               <Image
                 src="/images/profile.jpg"
                 alt="Shubham Chakraborty"
-                width={160}
-                height={160}
+                width={192}
+                height={192}
                 className="object-cover w-full h-full"
                 priority
               />

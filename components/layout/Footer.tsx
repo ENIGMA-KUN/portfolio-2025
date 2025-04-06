@@ -90,9 +90,6 @@ const Footer = () => {
             <p className="text-gray-600 dark:text-gray-400 mb-2">
               <span className="font-medium">Email:</span> chakraborty.shubham007@gmail.com
             </p>
-            <p className="text-gray-600 dark:text-gray-400 mb-2">
-              <span className="font-medium">Phone:</span> +1 (623) 340-7022
-            </p>
             <p className="text-gray-600 dark:text-gray-400">
               <span className="font-medium">Location:</span> Tempe, AZ
             </p>

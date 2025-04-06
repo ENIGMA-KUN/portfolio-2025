@@ -15,29 +15,52 @@ export default function BackgroundAnimation() {
     containerRef.current.appendChild(renderer.domElement);
 
     // Neural Network Nodes
-    const nodeCount = 50;
+    const nodeCount = 75;
     const nodes: THREE.Mesh[] = [];
-    const nodeGeometry = new THREE.SphereGeometry(0.05, 16, 16);
+    const nodeGeometry = new THREE.SphereGeometry(0.08, 16, 16);
     const nodeMaterial = new THREE.MeshPhongMaterial({
       color: 0x3B82F6,
       emissive: 0x3B82F6,
-      emissiveIntensity: 0.2,
+      emissiveIntensity: 0.4,
     });
 
     // Create nodes
     for (let i = 0; i < nodeCount; i++) {
       const node = new THREE.Mesh(nodeGeometry, nodeMaterial);
       node.position.set(
-        (Math.random() - 0.5) * 20,
-        (Math.random() - 0.5) * 20,
-        (Math.random() - 0.5) * 20
+        (Math.random() - 0.5) * 30,
+        (Math.random() - 0.5) * 30,
+        (Math.random() - 0.5) * 30
       );
       nodes.push(node);
       scene.add(node);
     }
 
+    // Create connections between nodes
+    const connections: THREE.Line[] = [];
+    const lineMaterial = new THREE.LineBasicMaterial({
+      color: 0x3B82F6,
+      transparent: true,
+      opacity: 0.2,
+    });
+
+    for (let i = 0; i < nodeCount; i++) {
+      for (let j = i + 1; j < nodeCount; j++) {
+        const distance = nodes[i].position.distanceTo(nodes[j].position);
+        if (distance < 8) {
+          const geometry = new THREE.BufferGeometry().setFromPoints([
+            nodes[i].position,
+            nodes[j].position,
+          ]);
+          const line = new THREE.Line(geometry, lineMaterial);
+          connections.push(line);
+          scene.add(line);
+        }
+      }
+    }
+
     // Singularity Particles
-    const particleCount = 500;
+    const particleCount = 300;
     const particles = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
     const velocities = new Float32Array(particleCount * 3);
@@ -85,9 +108,21 @@ export default function BackgroundAnimation() {
       requestAnimationFrame(animate);
 
       // Update neural network nodes
-      nodes.forEach((node) => {
-        node.rotation.x += 0.001;
-        node.rotation.y += 0.001;
+      nodes.forEach((node, index) => {
+        node.rotation.x += 0.002;
+        node.rotation.y += 0.002;
+        // Add slight position movement
+        node.position.y += Math.sin(Date.now() * 0.001 + index) * 0.01;
+      });
+
+      // Update connections
+      connections.forEach((line, index) => {
+        line.geometry.dispose();
+        const points = line.geometry.attributes.position.array;
+        line.geometry = new THREE.BufferGeometry().setFromPoints([
+          new THREE.Vector3(points[0], points[1] + Math.sin(Date.now() * 0.001 + index) * 0.1, points[2]),
+          new THREE.Vector3(points[3], points[4] + Math.sin(Date.now() * 0.001 + index + Math.PI) * 0.1, points[5]),
+        ]);
       });
 
       // Update singularity particles
@@ -153,6 +188,9 @@ export default function BackgroundAnimation() {
         node.geometry.dispose();
         (node.material as THREE.Material).dispose();
       });
+      connections.forEach(line => {
+        line.geometry.dispose();
+      });
       particles.dispose();
       particleMaterial.dispose();
       renderer.dispose();
@@ -162,7 +200,7 @@ export default function BackgroundAnimation() {
   return (
     <div
       ref={containerRef}
-      className="absolute top-0 left-0 w-full h-full -z-10 pointer-events-none bg-gradient-to-b from-dark/50 to-gray-900/50"
+      className="absolute top-0 left-0 w-full h-full -z-20 pointer-events-none"
     />
   );
 }
