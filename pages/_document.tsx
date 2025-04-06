@@ -4,7 +4,7 @@ import BackgroundAnimation from '../components/three/BackgroundAnimation';
 import HeroSection from '../components/sections/HeroSection';
 import AboutSection from '../components/sections/AboutSection';
 import ExperienceSection from '../components/sections/ExperienceSection';
-import ProjectsSection from '../components/sections/ProjectsSection';
+import ProjectsSection from '../components/sections/ProjectSection';
 import ResearchSection from '../components/sections/ResearchSection';
 import ContactSection from '../components/sections/ContactSection';
 
