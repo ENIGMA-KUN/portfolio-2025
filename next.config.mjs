@@ -10,6 +10,9 @@ const nextConfig = {
     ],
     unoptimized: true,
   },
+  experimental: {
+    optimizeCss: false,
+  },
 }
 
 export default nextConfig

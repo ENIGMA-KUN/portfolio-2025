@@ -1,18 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/app/**/*.{js,ts,jsx,tsx}",
-    "./src/components/**/*.{js,ts,jsx,tsx}",
-    "./pages/**/*.{js,ts,jsx,tsx}",
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './styles/**/*.css',
   ],
   theme: {
     extend: {
       colors: {
-        primary: "#0070f3",
-        secondary: "#6D28D9",
-        accent: "#4C1D95",
-        dark: "#121212",
-        light: "#F8FAFC",
+        primary: '#3B82F6',
+        secondary: '#10B981',
+        dark: '#1F2937',
+        light: '#F3F4F6',
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
@@ -42,7 +41,16 @@ module.exports = {
           },
         },
       },
+      backgroundImage: {
+        'grid-pattern': "url('/images/grid-pattern.svg')",
+      },
+      boxShadow: {
+        'glow': '0 0 15px rgba(59, 130, 246, 0.5)',
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
+  ],
 }
