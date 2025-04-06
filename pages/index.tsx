@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import Layout from '../components/layout/Layout';
-import BackgroundAnimation from '../components/three/BackgroundAnimation';
 import HeroSection from '../components/sections/HeroSection';
 import AboutSection from '../components/sections/AboutSection';
 import ExperienceSection from '../components/sections/ExperienceSection';
@@ -11,9 +10,6 @@ import ContactSection from '../components/sections/ContactSection';
 const Home: NextPage = () => {
   return (
     <Layout>
-      {/* Background Particles */}
-      <BackgroundAnimation />
-      
       {/* Hero Section */}
       <HeroSection />
       

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane } from 'react-icons/fa';
+import { FaEnvelope, FaMapMarkerAlt, FaPaperPlane } from 'react-icons/fa';
 
 const ContactForm = () => {
   const [formState, setFormState] = useState({
@@ -81,23 +81,6 @@ const ContactForm = () => {
                 className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors"
               >
                 chakraborty.shubham007@gmail.com
-              </a>
-            </div>
-          </div>
-          
-          <div className="flex items-start">
-            <div className="flex-shrink-0 mt-1">
-              <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-                <FaPhone size={18} />
-              </div>
-            </div>
-            <div className="ml-4">
-              <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">Phone</h4>
-              <a 
-                href="tel:+16233407022" 
-                className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors"
-              >
-                +1 (623) 340-7022
               </a>
             </div>
           </div>
