@@ -1,5 +1,5 @@
-import React, { useRef, useState, useEffect, useMemo } from 'react';
-import { motion, useInView } from 'framer-motion';
+import React, { useRef, useState, useEffect, useMemo, useCallback, memo } from 'react';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import { projectsData, getProjectCategories, getFeaturedProjects, Project } from '../data/projectsData';
 import ProjectFilter from '../ui/ProjectFilter';
@@ -21,8 +21,8 @@ interface SectionHeaderProps {
   subtitle: string;
 }
 
-// Project Card Component
-const ProjectCard: React.FC<ProjectCardProps> = ({
+// Optimized Project Card Component with memoization
+const ProjectCard = memo(({ 
   title,
   description,
   technologies,
@@ -34,15 +34,37 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   index = 0
 }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { 
+    once: true, 
+    margin: "-100px",
+    amount: 0.1 // Reduce rerenders by setting threshold amount
+  });
+  
+  const shouldReduceMotion = useReducedMotion();
+  
+  // Memoize animation variants to prevent unnecessary recalculation
+  const animationVariants = useMemo(() => ({
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0 }
+  }), []);
+  
+  // Optimize transition
+  const transition = useMemo(() => ({
+    duration: 0.6, 
+    delay: index * 0.1,
+    type: "tween" // More performant than spring for many elements
+  }), [index]);
   
   return (
     <motion.div 
       ref={ref}
       className={`flex flex-col ${reversed ? 'md:flex-row-reverse' : 'md:flex-row'} gap-8 mb-20 last:mb-0`}
-      initial={{ opacity: 0, y: 50 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      variants={animationVariants}
+      transition={transition}
+      // Use translateZ(0) to enable GPU acceleration
+      style={{ willChange: 'opacity, transform', transform: 'translateZ(0)' }}
     >
       {/* Project Image */}
       <div className="w-full md:w-1/2 rounded-lg overflow-hidden shadow-lg glow-hover">
@@ -176,17 +198,26 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       </div>
     </motion.div>
   );
-};
+});
 
-// Section Header Component
-const SectionHeader: React.FC<SectionHeaderProps> = ({ title, subtitle }) => {
+// Add display name for memoized component
+ProjectCard.displayName = 'ProjectCard';
+
+// Optimize Section Header Component
+const SectionHeader = memo(({ title, subtitle }) => {
+  const shouldReduceMotion = useReducedMotion();
+  
   return (
     <motion.div
       className="text-center mb-16"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
+      transition={{ 
+        duration: 0.5,
+        type: "tween"
+      }}
+      style={{ willChange: 'opacity, transform' }}
     >
       <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
         {title}
@@ -196,6 +227,47 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({ title, subtitle }) => {
       </p>
       <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mt-6 rounded-full" />
     </motion.div>
+  );
+});
+
+SectionHeader.displayName = 'SectionHeader';
+
+// Add virtualization for projects list
+const VirtualizedProjectList = ({ projects }) => {
+  const [visibleProjects, setVisibleProjects] = useState([]);
+  
+  // Only show projects that are close to the viewport
+  useEffect(() => {
+    setVisibleProjects(projects.slice(0, 5)); // Initially show first 5
+    
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.body.scrollHeight;
+      
+      // Load more projects as user scrolls down
+      if (scrollY + windowHeight > documentHeight * 0.7 && visibleProjects.length < projects.length) {
+        setVisibleProjects(projects.slice(0, Math.min(projects.length, visibleProjects.length + 3)));
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [projects, visibleProjects.length]);
+  
+  return (
+    <div className="py-8">
+      {visibleProjects.map((project, index) => (
+        <ProjectCard 
+          key={project.title}
+          {...project}
+          index={index}
+        />
+      ))}
+      {visibleProjects.length < projects.length && (
+        <div className="h-[500px]" /> // Spacer to allow scrolling to load more
+      )}
+    </div>
   );
 };
 
@@ -253,15 +325,7 @@ const ProjectsSection: React.FC = () => {
           onSortChange={setSelectedSort}
         />
         
-        <div className="py-8">
-          {filteredProjects.map((project, index) => (
-            <ProjectCard 
-              key={index}
-              {...project}
-              index={index}
-            />
-          ))}
-        </div>
+        <VirtualizedProjectList projects={filteredProjects} />
 
         {filteredProjects.length === 0 && (
           <motion.div 

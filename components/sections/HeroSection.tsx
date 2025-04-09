@@ -17,10 +17,10 @@ export default function HeroSection() {
     const interval = setInterval(() => {
       setCurrentRoleIndex((prevIndex) => (prevIndex + 1) % roles.length);
     }, 3000);
-    
+
     return () => clearInterval(interval);
   }, []);
-  
+
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-dark to-gray-900">
       {/* Neural Network Background */}
@@ -33,7 +33,7 @@ export default function HeroSection() {
         <Image
           src="/images/singularity.png"
           alt="AI and Human Connection"
-          width={1200}
+          width={1500}
           height={900}
           className="object-contain mix-blend-screen"
           priority
@@ -61,8 +61,8 @@ export default function HeroSection() {
               />
             </div>
           </motion.div>
-
-          <motion.div
+          
+          <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -88,7 +88,7 @@ export default function HeroSection() {
           >
             <a 
               href="https://github.com/enigma-kun" 
-              target="_blank" 
+              target="_blank"
               rel="noopener noreferrer"
               className="text-light hover:text-primary transition-colors"
             >
@@ -109,9 +109,9 @@ export default function HeroSection() {
               <FaEnvelope size={28} />
             </a>
           </motion.div>
-
+          
           {/* CTA Button */}
-          <motion.div
+          <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 1 }}

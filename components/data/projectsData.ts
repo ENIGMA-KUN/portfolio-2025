@@ -114,7 +114,7 @@ export const projectsData: Project[] = [
 
 export const getProjectCategories = (): string[] => {
   const categories = projectsData.map(project => project.category);
-  return [...new Set(categories)];
+  return Array.from(new Set(categories));
 };
 
 export const getFeaturedProjects = (): Project[] => {

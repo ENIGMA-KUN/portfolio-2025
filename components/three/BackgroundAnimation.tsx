@@ -1,11 +1,35 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import { useReducedMotion } from 'framer-motion';
 
 export default function BackgroundAnimation() {
   const containerRef = useRef<HTMLDivElement>(null);
-
+  const shouldReduceMotion = useReducedMotion();
+  const [isVisible, setIsVisible] = useState(true);
+  const animationRef = useRef<number | null>(null);
+  
+  // Intersection Observer to only animate when visible
   useEffect(() => {
     if (!containerRef.current) return;
+    
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+    
+    observer.observe(containerRef.current);
+    
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!containerRef.current || !isVisible) return;
 
     // Scene setup with better quality
     const scene = new THREE.Scene();
@@ -13,18 +37,18 @@ export default function BackgroundAnimation() {
     const renderer = new THREE.WebGLRenderer({ 
       antialias: true,
       alpha: true,
-      precision: 'highp',
+      precision: shouldReduceMotion ? 'mediump' : 'highp', // Reduce quality if reduced motion
       powerPreference: 'high-performance'
     });
     
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Cap at 2x for performance
     renderer.setSize(window.innerWidth, window.innerHeight);
     containerRef.current.appendChild(renderer.domElement);
 
-    // Neural Network Nodes - Higher quality
-    const nodeCount = 60;
+    // Neural Network Nodes - Optimized count
+    const nodeCount = shouldReduceMotion ? 40 : 60; // Reduce nodes for reduced motion
     const nodes: THREE.Mesh[] = [];
-    const nodeGeometry = new THREE.SphereGeometry(0.06, 32, 32); // More segments for smoother spheres
+    const nodeGeometry = new THREE.SphereGeometry(0.06, shouldReduceMotion ? 16 : 32, shouldReduceMotion ? 16 : 32);
     const nodeMaterial = new THREE.MeshPhongMaterial({
       color: 0x4a9eff,
       emissive: 0x4a9eff,
@@ -49,7 +73,7 @@ export default function BackgroundAnimation() {
       scene.add(node);
     }
 
-    // Create high-quality connections
+    // Use fewer connections for better performance
     const connections: THREE.Line[] = [];
     const lineMaterial = new THREE.LineBasicMaterial({
       color: 0x4a9eff,
@@ -57,9 +81,13 @@ export default function BackgroundAnimation() {
       opacity: 0.15,
     });
 
-    // Create connections with better organization
-    for (let i = 0; i < nodeCount; i++) {
-      for (let j = i + 1; j < nodeCount; j++) {
+    // Optimize connection creation - limit the number of connections
+    const connectionLimit = shouldReduceMotion ? 100 : 200;
+    let connectionCount = 0;
+    
+    // Only create connections between closer nodes
+    for (let i = 0; i < nodeCount && connectionCount < connectionLimit; i++) {
+      for (let j = i + 1; j < nodeCount && connectionCount < connectionLimit; j++) {
         const distance = nodes[i].position.distanceTo(nodes[j].position);
         if (distance < 10) {
           const geometry = new THREE.BufferGeometry().setFromPoints([
@@ -69,16 +97,18 @@ export default function BackgroundAnimation() {
           const line = new THREE.Line(geometry, lineMaterial);
           connections.push(line);
           scene.add(line);
+          connectionCount++;
         }
       }
     }
 
-    // Background stars with better quality
-    const starCount = 500;
+    // Background stars - optimized count
+    const starCount = shouldReduceMotion ? 300 : 500;
     const starGeometry = new THREE.BufferGeometry();
     const starPositions = new Float32Array(starCount * 3);
     const starColors = new Float32Array(starCount * 3);
-
+    
+    // Pre-compute random positions instead of in animation loop
     for (let i = 0; i < starCount; i++) {
       const i3 = i * 3;
       const radius = Math.random() * 100;
@@ -122,73 +152,118 @@ export default function BackgroundAnimation() {
     // Camera position
     camera.position.z = 40;
 
-    // Smooth animation
+    // Smooth animation with throttling for performance
     let time = 0;
-    const animate = () => {
-      requestAnimationFrame(animate);
+    let lastUpdateTime = 0;
+    const updateInterval = shouldReduceMotion ? 1000/30 : 1000/60; // Lower FPS for reduced motion
+    
+    const animate = (currentTime: number) => {
+      if (!isVisible) return;
+      
+      animationRef.current = requestAnimationFrame(animate);
+      
+      // Throttle updates for better performance
+      const deltaTime = currentTime - lastUpdateTime;
+      if (deltaTime < updateInterval) return;
+      
+      lastUpdateTime = currentTime;
       time += 0.001;
 
-      // Smooth node movement
-      nodes.forEach((node, index) => {
-        const offset = index * 0.1;
-        node.position.y += Math.sin(time + offset) * 0.01;
-        node.rotation.x += 0.001;
-        node.rotation.y += 0.001;
-      });
-
-      // Update connections smoothly
-      connections.forEach((line, index) => {
-        const sourceNode = nodes[Math.floor(index / (nodeCount - 1))];
-        const targetNode = nodes[index % (nodeCount - 1)];
-        
-        if (sourceNode && targetNode) {
-          line.geometry.setFromPoints([sourceNode.position, targetNode.position]);
+      // Only update node positions every other frame for better performance
+      if (Math.floor(currentTime / 1000) % 2 === 0) {
+        // Smooth node movement
+        nodes.forEach((node, index) => {
+          const offset = index * 0.1;
+          node.position.y += Math.sin(time + offset) * 0.01;
+          node.rotation.x += 0.001;
+          node.rotation.y += 0.001;
+        });
+  
+        // Update connections - the expensive part, do it less frequently
+        if (Math.floor(currentTime / 2000) % 2 === 0) {
+          connections.forEach((line, index) => {
+            const sourceNodeIndex = Math.floor(index / (nodeCount / 10));
+            const targetNodeIndex = index % (nodeCount - 1);
+            
+            if (nodes[sourceNodeIndex] && nodes[targetNodeIndex]) {
+              line.geometry.setFromPoints([
+                nodes[sourceNodeIndex].position, 
+                nodes[targetNodeIndex].position
+              ]);
+            }
+          });
         }
-      });
+      }
 
-      // Rotate star field very slowly
+      // Rotate star field very slowly - cheap operation
       starField.rotation.y += 0.0001;
       
       renderer.render(scene, camera);
     };
 
-    animate();
+    animationRef.current = requestAnimationFrame(animate);
 
-    // Handle resize with proper pixel ratio
+    // Handle resize with debouncing to prevent excessive calculations
+    let resizeTimeout: number | null = null;
     const handleResize = () => {
-      if (!containerRef.current) return;
-      const width = containerRef.current.clientWidth;
-      const height = containerRef.current.clientHeight;
-      camera.aspect = width / height;
-      camera.updateProjectionMatrix();
-      renderer.setPixelRatio(window.devicePixelRatio);
-      renderer.setSize(width, height);
+      if (resizeTimeout) {
+        window.clearTimeout(resizeTimeout);
+      }
+      
+      resizeTimeout = window.setTimeout(() => {
+        if (!containerRef.current) return;
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setSize(width, height);
+      }, 250); // Debounce for 250ms
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize, { passive: true });
     handleResize();
 
     // Cleanup
     return () => {
+      // Cancel animation frame
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+      
+      // Remove resize listener
       window.removeEventListener('resize', handleResize);
-      containerRef.current?.removeChild(renderer.domElement);
-      nodes.forEach(node => {
-        node.geometry.dispose();
-        (node.material as THREE.Material).dispose();
+      
+      // Only proceed with cleanup if container exists
+      if (!containerRef.current) return;
+      
+      // Remove canvas
+      containerRef.current.removeChild(renderer.domElement);
+      
+      // Dispose geometries and materials
+      nodeGeometry.dispose();
+      nodeMaterial.dispose();
+      
+      nodes.forEach((node) => {
+        scene.remove(node);
       });
-      connections.forEach(line => {
+      
+      connections.forEach((line) => {
+        scene.remove(line);
         line.geometry.dispose();
       });
+      
       starGeometry.dispose();
       starMaterial.dispose();
       renderer.dispose();
     };
-  }, []);
+  }, [isVisible, shouldReduceMotion]);
 
   return (
     <div
       ref={containerRef}
       className="absolute top-0 left-0 w-full h-full pointer-events-none bg-[#000814]"
+      style={{ contain: 'paint layout' }} // Improve performance with CSS containment
     />
   );
 }

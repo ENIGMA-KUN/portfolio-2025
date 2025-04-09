@@ -1,14 +1,16 @@
 import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { FaBrain, FaDatabase, FaCode } from 'react-icons/fa';
 
 // Neural Network Component (Simplified version for the About section)
 const NeuralNetworkVisualization = () => {
+  const shouldReduceMotion = useReducedMotion();
+  
   return (
     <div className="w-full h-64 bg-gray-900 rounded-lg overflow-hidden">
       <div className="relative w-full h-full flex items-center justify-center">
         {/* Animated background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-purple-600/20 animate-pulse" />
+        <div className={`absolute inset-0 bg-gradient-to-br from-blue-600/20 to-purple-600/20 ${!shouldReduceMotion && 'animate-pulse'}`} />
         
         {/* Neural network nodes and connections */}
         <div className="relative grid grid-cols-4 gap-8 p-6">
@@ -18,13 +20,16 @@ const NeuralNetworkVisualization = () => {
               key={`input-${i}`}
               className="w-4 h-4 bg-blue-500 rounded-full"
               initial={{ opacity: 0.3 }}
-              animate={{ 
+              animate={shouldReduceMotion ? { opacity: 0.7 } : { 
                 opacity: [0.3, 1, 0.3],
               }}
               transition={{
                 duration: 2,
-                repeat: Infinity,
-                delay: i * 0.2,
+                repeat: shouldReduceMotion ? 0 : Infinity,
+                delay: shouldReduceMotion ? 0 : i * 0.2,
+                // Performance optimization for animations
+                type: "tween",
+                ease: "easeInOut"
               }}
             />
           ))}
@@ -35,13 +40,15 @@ const NeuralNetworkVisualization = () => {
               key={`hidden1-${i}`}
               className="w-4 h-4 bg-indigo-500 rounded-full"
               initial={{ opacity: 0.3 }}
-              animate={{ 
+              animate={shouldReduceMotion ? { opacity: 0.7 } : { 
                 opacity: [0.3, 1, 0.3],
               }}
               transition={{
                 duration: 2,
-                repeat: Infinity,
-                delay: i * 0.15 + 0.5,
+                repeat: shouldReduceMotion ? 0 : Infinity,
+                delay: shouldReduceMotion ? 0 : i * 0.15 + 0.5,
+                type: "tween",
+                ease: "easeInOut"
               }}
             />
           ))}
@@ -165,7 +172,12 @@ const StatItem = ({ value, label, delay = 0 }) => {
 // About Section
 const AboutSection = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { 
+    once: true, 
+    margin: "-100px",
+    amount: 0.1 
+  });
+  const shouldReduceMotion = useReducedMotion();
   
   const aiMlSkills = [
     { name: "PyTorch / TensorFlow", level: 95 },

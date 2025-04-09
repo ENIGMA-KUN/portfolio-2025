@@ -2,41 +2,76 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Performance optimizations */
 @layer base {
   html {
     scroll-behavior: smooth;
+  }
+  
+  /* Improve scrolling performance with contain */
+  section {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 500px;
+    will-change: auto;
+  }
+  
+  /* Avoid layout shifts during image loading */
+  img {
+    content-visibility: auto;
+    min-height: 1px;
+  }
+  
+  /* Reduce paint operations for fixed elements */
+  .fixed {
+    will-change: transform;
+    transform: translateZ(0);
   }
 }
 
 @layer components {
   .nav-link {
-    @apply px-4 py-2 text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors relative;
+    @apply relative px-4 py-2 text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors duration-200;
   }
-
   .nav-link::after {
-    @apply content-[''] absolute left-0 bottom-0 w-0 h-0.5 bg-primary transition-all duration-300;
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300;
   }
-
   .nav-link:hover::after {
     @apply w-full;
   }
-
   .blueprint-bg {
-    background-color: #0a192f;
-    background-image: radial-gradient(#1a2c4c 1px, transparent 1px);
-    background-size: 32px 32px;
+    background-image: 
+      linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+    background-size: 25px 25px;
+  }
+  .glow-hover {
+    @apply transition-all duration-300;
+  }
+  .glow-hover:hover {
+    @apply shadow-lg shadow-primary/20;
   }
 }
 
 @layer utilities {
   .glow-hover {
-    @apply transition-all duration-300 hover:shadow-glow;
+    @apply transition-all duration-300;
   }
-
+  .glow-hover:hover {
+    @apply shadow-lg shadow-primary/20;
+  }
+  
+  /* Optimize for GPU animations */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+  
   .animate-scroll {
     animation: scroll 1.5s ease-in-out infinite;
   }
-
+  
   @keyframes scroll {
     0% {
       transform: translateY(0);
@@ -54,16 +89,16 @@
 }
 
 :root {
-  --foreground-rgb: 243, 244, 246;
-  --background-start-rgb: 17, 24, 39;
-  --background-end-rgb: 17, 24, 39;
+  --foreground-rgb: 17, 24, 39;
+  --background-start-rgb: 249, 250, 251;
+  --background-end-rgb: 243, 244, 246;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 18, 18, 18;
-    --background-end-rgb: 18, 18, 18;
+    --foreground-rgb: 229, 231, 235;
+    --background-start-rgb: 5, 10, 24;
+    --background-end-rgb: 15, 23, 42;
   }
 }
 
@@ -77,20 +112,29 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
+/* Optimize scrollbar for better performance */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(59, 130, 246, 0.5) rgba(17, 24, 39, 0.1);
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgb(17, 24, 39);
+  background: rgba(17, 24, 39, 0.1);
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgb(59, 130, 246, 0.5);
-  border-radius: 5px;
+  background: rgba(59, 130, 246, 0.5);
+  border-radius: 10px;
+  transition: all 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(59, 130, 246, 0.8);
+  background: rgba(59, 130, 246, 0.7);
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
 import Header from './Header';
 import Footer from './Footer';
@@ -10,17 +10,51 @@ interface LayoutProps {
   description?: string;
 }
 
+// Performance optimization for scrolling
+const useScrollOptimization = () => {
+  useEffect(() => {
+    // Add a passive scroll listener to improve performance
+    const scrollOptions = { passive: true };
+    window.addEventListener('scroll', () => {}, scrollOptions);
+    
+    // Use requestAnimationFrame to optimize animations during scroll
+    let scheduledAnimationFrame = false;
+    
+    const scrollHandler = () => {
+      if (scheduledAnimationFrame) {
+        return;
+      }
+      
+      scheduledAnimationFrame = true;
+      
+      requestAnimationFrame(() => {
+        // Any scroll-based animations would go here
+        scheduledAnimationFrame = false;
+      });
+    };
+    
+    window.addEventListener('scroll', scrollHandler, scrollOptions);
+    
+    return () => {
+      window.removeEventListener('scroll', scrollHandler);
+    };
+  }, []);
+};
+
 const Layout: React.FC<LayoutProps> = ({ 
   children, 
   title = 'Shubham Chakraborty | AI/ML Engineer & Data Scientist',
   description = 'Portfolio of Shubham Chakraborty, an AI/ML Engineer, Data Scientist, and Entrepreneur specializing in machine learning, LLMs, and climate technology.'
 }) => {
+  // Use the scroll optimization hook
+  useScrollOptimization();
+  
   return (
     <>
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <link rel="icon" href="/favicon.ico" />
         
         {/* Open Graph / Social Media Meta Tags */}
