@@ -96,75 +96,73 @@ const NeuralNetworkVisualization = () => {
 };
 
 // Skill Category Component
-const SkillCategory = ({ title, skills, icon }) => {
+interface Skill {
+  name: string;
+  level: number;
+}
+
+interface SkillCategoryProps {
+  title: string;
+  skills: Skill[];
+  icon: React.ReactNode;
+}
+
+const SkillCategory = ({ title, skills, icon }: SkillCategoryProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
-  
+
   return (
     <motion.div
       ref={ref}
-      className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md border border-gray-100 dark:border-gray-700"
       initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.5 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6 }}
+      className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 hover:shadow-lg hover:shadow-primary/10 transition-shadow duration-300"
     >
       <div className="flex items-center mb-4">
-        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary mr-3">
+        <div className="mr-4 text-primary text-2xl">
           {icon}
         </div>
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{title}</h3>
+        <h3 className="text-xl font-bold text-primary">{title}</h3>
       </div>
       
-      <div className="space-y-3">
+      <ul className="space-y-3">
         {skills.map((skill, index) => (
-          <motion.div
-            key={index}
-            className="flex flex-col"
-            initial={{ opacity: 0, x: -10 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
-            transition={{ duration: 0.3, delay: 0.1 * index }}
-          >
-            <div className="flex justify-between items-center mb-1">
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{skill.name}</span>
-              <span className="text-xs text-gray-500 dark:text-gray-400">{skill.level}%</span>
+          <li key={index} className="flex flex-col">
+            <div className="flex justify-between mb-1">
+              <span className="text-gray-300">{skill.name}</span>
+              <span className="text-xs text-primary">{skill.level}%</span>
             </div>
-            <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-              <motion.div
+            <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+              <div 
                 className="h-full bg-gradient-to-r from-primary to-secondary"
-                initial={{ width: 0 }}
-                animate={isInView ? { width: `${skill.level}%` } : { width: 0 }}
-                transition={{ duration: 1, delay: 0.1 * index + 0.3 }}
+                style={{ width: `${skill.level}%` }}
               />
             </div>
-          </motion.div>
+          </li>
         ))}
-      </div>
+      </ul>
     </motion.div>
   );
 };
 
-// Stats Item Component
-const StatItem = ({ value, label, delay = 0 }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-  
+// StatCard Component
+interface StatCardProps {
+  value: string;
+  label: string;
+}
+
+const StatCard = ({ value, label }: StatCardProps) => {
   return (
-    <motion.div 
-      ref={ref}
-      className="text-center p-4 rounded-lg bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition-shadow border border-gray-100 dark:border-gray-700"
+    <motion.div
+      className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 text-center hover:shadow-lg hover:shadow-primary/10 transition-shadow duration-300"
       initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.5, delay }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
     >
-      <motion.p 
-        className="text-3xl font-bold text-primary"
-        initial={{ scale: 0.8 }}
-        animate={isInView ? { scale: 1 } : { scale: 0.8 }}
-        transition={{ duration: 0.5, delay: delay + 0.2 }}
-      >
-        {value}
-      </motion.p>
-      <p className="text-sm text-gray-600 dark:text-gray-400">{label}</p>
+      <div className="text-3xl font-bold text-primary mb-2">{value}</div>
+      <div className="text-sm text-gray-300">{label}</div>
     </motion.div>
   );
 };
@@ -255,11 +253,10 @@ const AboutSection = () => {
             {/* Stats */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-10">
               {stats.map((stat, index) => (
-                <StatItem 
+                <StatCard 
                   key={index} 
                   value={stat.value} 
                   label={stat.label}
-                  delay={0.1 * index} 
                 />
               ))}
             </div>

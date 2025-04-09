@@ -21,8 +21,12 @@ interface SectionHeaderProps {
   subtitle: string;
 }
 
+interface VirtualizedProjectListProps {
+  projects: Project[];
+}
+
 // Optimized Project Card Component with memoization
-const ProjectCard = memo(({ 
+const ProjectCard = memo(({
   title,
   description,
   technologies,
@@ -32,7 +36,7 @@ const ProjectCard = memo(({
   reversed = false,
   achievement,
   index = 0
-}) => {
+}: ProjectCardProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { 
     once: true, 
@@ -204,7 +208,7 @@ const ProjectCard = memo(({
 ProjectCard.displayName = 'ProjectCard';
 
 // Optimize Section Header Component
-const SectionHeader = memo(({ title, subtitle }) => {
+const SectionHeader = memo(({ title, subtitle }: SectionHeaderProps) => {
   const shouldReduceMotion = useReducedMotion();
   
   return (
@@ -233,8 +237,8 @@ const SectionHeader = memo(({ title, subtitle }) => {
 SectionHeader.displayName = 'SectionHeader';
 
 // Add virtualization for projects list
-const VirtualizedProjectList = ({ projects }) => {
-  const [visibleProjects, setVisibleProjects] = useState([]);
+const VirtualizedProjectList = ({ projects }: VirtualizedProjectListProps) => {
+  const [visibleProjects, setVisibleProjects] = useState<Project[]>([]);
   
   // Only show projects that are close to the viewport
   useEffect(() => {

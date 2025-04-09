@@ -8,6 +8,19 @@ import {
   FaBriefcase
 } from 'react-icons/fa';
 
+// Define TypeScript interfaces
+interface ExperienceCardProps {
+  title: string;
+  company: string;
+  location: string;
+  startDate: string;
+  endDate: string;
+  description: string[];
+  technologies?: string[];
+  logo?: string;
+  index?: number;
+}
+
 // Experience Card Component
 const ExperienceCard = ({ 
   title, 
@@ -19,7 +32,7 @@ const ExperienceCard = ({
   technologies = [], 
   logo = '/images/company-placeholder.svg',
   index = 0
-}) => {
+}: ExperienceCardProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   
@@ -97,7 +110,23 @@ const ExperienceCard = ({
 };
 
 // Education Card Component
-const EducationCard = ({ school, degree, gpa, duration, description, logo }) => {
+interface EducationCardProps {
+  school: string;
+  degree: string;
+  gpa?: string;
+  duration: string;
+  description?: string;
+  logo?: string;
+}
+
+const EducationCard = ({ 
+  school, 
+  degree, 
+  gpa, 
+  duration, 
+  description, 
+  logo 
+}: EducationCardProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   
@@ -146,7 +175,12 @@ const EducationCard = ({ school, degree, gpa, duration, description, logo }) => 
 };
 
 // Section Header Component
-const SectionHeader = ({ title, subtitle }) => {
+interface SectionHeaderProps {
+  title: string;
+  subtitle: string;
+}
+
+const SectionHeader = ({ title, subtitle }: SectionHeaderProps) => {
   return (
     <motion.div
       className="text-center mb-16"

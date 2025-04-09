@@ -33,7 +33,7 @@ export default function HeroSection() {
         <Image
           src="/images/singularity.png"
           alt="AI and Human Connection"
-          width={1500}
+          width={1200}
           height={900}
           className="object-contain mix-blend-screen"
           priority

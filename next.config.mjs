@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   trailingSlash: true,
+  output: 'export',  // Enable static HTML export
   images: {
     remotePatterns: [
       {
