@@ -1,6 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect, useMemo } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { projectsData, getProjectCategories, getFeaturedProjects, Project } from '../data/projectsData';
+import ProjectFilter from '../ui/ProjectFilter';
 
 interface ProjectCardProps {
   title: string;
@@ -198,62 +200,61 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({ title, subtitle }) => {
 };
 
 // Projects Section Component
-const ProjectsSection = () => {
-  const projects = [
-    {
-      title: 'RAG-powered Academic Assistant',
-      description: 'A comprehensive retrieval-augmented generation system that combines vector databases with fine-tuned LLMs, achieving 78% improvement in answer accuracy and reduced hallucinations by 65% for academic information retrieval tasks across multiple domains.',
-      technologies: ['LangChain', 'FAISS', 'LLMs', 'Sentence-Transformers', 'Streamlit'],
-      githubLink: 'https://github.com/ENIGMA-KUN/RAG-system',
-      image: '/images/projects/rag-system.jpg',
-      achievement: 'BLEU score of 0.72 and ROUGE-L score of 0.68'
-    },
-    {
-      title: 'Emissions Reduction Modeling Platform',
-      description: 'Developed a comprehensive climate scenario analysis engine that enables 30-50% reduction modeling by 2030. Created financial impact analysis tools calculating NPV, ROI, payback periods, and marginal abatement costs with statistical forecasting capabilities.',
-      technologies: ['Python', 'Pandas', 'AWS', 'React', 'D3.js', 'MongoDB'],
-      demoLink: 'https://emitrix.io',
-      image: '/images/projects/emissions-platform.jpg',
-      achievement: 'Secured $100K seed funding',
-      reversed: true
-    },
-    {
-      title: 'LLM Capability Analysis Framework',
-      description: 'Developed a first-of-its-kind framework quantifying emergent capability thresholds across LLM architectures (7B-72B), achieving 87% prediction accuracy using novel E-manifold metrics that uncovered previously unobserved scaling laws for reasoning tasks.',
-      technologies: ['PyTorch', 'HuggingFace', 'Transformers', 'CUDA'],
-      githubLink: 'https://github.com/enigma-kun/llm-capability-analysis',
-      image: '/images/projects/llm-analysis.jpg',
-      achievement: '42% reduced computation cost'
-    },
-    {
-      title: 'Carbon Credit Blockchain System',
-      description: 'Implemented Ethereum smart contracts with IPFS storage for transparent carbon credit verification, reducing verification time by 40% through automated data management. Integrated with IoT emission monitoring using Raspberry Pi and MQ-135 sensors.',
-      technologies: ['Ethereum', 'IPFS', 'React', 'Python', 'IoT'],
-      githubLink: 'https://github.com/enigma-kun/carbon-credit',
-      image: '/images/projects/carbon-blockchain.jpg',
-      achievement: 'EY Techathon 2 Finalist',
-      reversed: true
-    },
-    {
-      title: 'Medical Image Segmentation',
-      description: 'Processed over 3,000 medical images with U-Net architecture and transformer enhancements, achieving top 15% ranking in ISBI Challenge. Increased model accuracy from 82% to 92% via adaptive augmentation and hyperparameter tuning.',
-      technologies: ['PyTorch', 'U-Net', 'Transformers', 'MONAI'],
-      githubLink: 'https://github.com/enigma-kun/medical-image-analysis',
-      image: '/images/projects/medical-segmentation.jpg',
-      achievement: 'Top 15% in ISBI Challenge'
-    }
+const ProjectsSection: React.FC = () => {
+  const [selectedCategory, setSelectedCategory] = useState<string>('Featured');
+  const [selectedSort, setSelectedSort] = useState<string>('default');
+  const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
+  
+  const categories = useMemo(() => getProjectCategories(), []);
+  const featuredProjects = useMemo(() => getFeaturedProjects(), []);
+  
+  const sortOptions = [
+    { value: 'default', label: 'Default Order' },
+    { value: 'title-asc', label: 'Title (A-Z)' },
+    { value: 'title-desc', label: 'Title (Z-A)' }
   ];
+  
+  useEffect(() => {
+    let result: Project[] = [];
+    
+    // Filter by category
+    if (selectedCategory === 'All') {
+      result = [...projectsData];
+    } else if (selectedCategory === 'Featured') {
+      result = featuredProjects;
+    } else {
+      result = projectsData.filter(project => project.category === selectedCategory);
+    }
+    
+    // Sort projects
+    if (selectedSort === 'title-asc') {
+      result.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (selectedSort === 'title-desc') {
+      result.sort((a, b) => b.title.localeCompare(a.title));
+    }
+    
+    setFilteredProjects(result);
+  }, [selectedCategory, selectedSort, featuredProjects]);
 
   return (
     <section id="projects" className="py-20 bg-white dark:bg-gray-900">
       <div className="container mx-auto px-4 md:px-6">
         <SectionHeader
-          title="Featured Projects"
+          title="Projects"
           subtitle="Innovative solutions across AI, machine learning, and software development"
         />
         
+        <ProjectFilter 
+          categories={categories}
+          selectedCategory={selectedCategory}
+          onCategoryChange={setSelectedCategory}
+          sortOptions={sortOptions}
+          selectedSort={selectedSort}
+          onSortChange={setSelectedSort}
+        />
+        
         <div className="py-8">
-          {projects.map((project, index) => (
+          {filteredProjects.map((project, index) => (
             <ProjectCard 
               key={index}
               {...project}
@@ -261,6 +262,17 @@ const ProjectsSection = () => {
             />
           ))}
         </div>
+
+        {filteredProjects.length === 0 && (
+          <motion.div 
+            className="text-center py-16"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <p className="text-xl text-gray-600 dark:text-gray-400">No projects found matching your criteria.</p>
+          </motion.div>
+        )}
       </div>
     </section>
   );

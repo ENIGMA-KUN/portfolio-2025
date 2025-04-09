@@ -166,6 +166,39 @@ const SectionHeader = ({ title, subtitle }) => {
   );
 };
 
+// Experience Stats Component
+const ExperienceStats = () => {
+  return (
+    <motion.div 
+      className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+    >
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-100 dark:border-gray-700">
+        <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">Professional Experience</h3>
+        <div className="flex items-center gap-4">
+          <div className="text-4xl font-bold text-primary">1.5+</div>
+          <div className="text-gray-600 dark:text-gray-400">
+            Years of professional experience in AI research and software development
+          </div>
+        </div>
+      </div>
+      
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-100 dark:border-gray-700">
+        <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">Startup Experience</h3>
+        <div className="flex items-center gap-4">
+          <div className="text-4xl font-bold text-secondary">3+</div>
+          <div className="text-gray-600 dark:text-gray-400">
+            Years of entrepreneurial experience in climate tech and AI-powered solutions
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
 // Experience Section
 const ExperienceSection = () => {
   const experiences = [
@@ -197,7 +230,7 @@ const ExperienceSection = () => {
       logo: '/images/logos/nexus.png'
     },
     {
-      title: 'Software Engineer',
+      title: 'Software Engineer (Instructional Design Assistant)',
       company: 'Arizona State University',
       location: 'Tempe, AZ',
       startDate: 'May 2024',
@@ -245,52 +278,56 @@ const ExperienceSection = () => {
     {
       school: 'Arizona State University',
       degree: 'MS in Information Technology',
-      gpa: '3.90/4.00',
+      gpa: '3.80/4.00',
       duration: 'Aug 2023 – May 2025',
-      description: 'Specialization: Artificial Intelligence & Machine Learning',
+      description: 'Specialization: Artificial Intelligence & Machine Learning. Research: "A Mathematical Framework for Predicting and Measuring Emergent Capabilities in Large Language Models" (Under Review, ICML 2024)',
       logo: '/images/logos/asu.png'
     },
     {
-      school: 'BMS Institute of Technology',
-      degree: 'BE in Electronics & Telecommunication',
+      school: 'Indian Institute of Management Bangalore',
+      degree: 'Foundation of Management (Accelerated Program)',
+      gpa: 'Certified',
+      duration: 'April 2023',
+      description: 'Selected among top 60 candidates nationally. Specialized in AI Applications in Business.',
+      logo: '/images/logos/iimb.png'
+    },
+    {
+      school: 'BMS Institute of Technology & Management',
+      degree: 'B.E. in Electronics & Telecommunication',
       gpa: '3.80/4.00',
       duration: 'Aug 2019 – May 2023',
-      description: 'Thesis: "Blockchain-Based Carbon Credit Verification System"',
+      description: 'Publications: "Transformer-Based Architecture for Enhanced Response Coherence" (IEEE). "Carbon Automated Emission Monitoring" (IEEE).',
       logo: '/images/logos/bms.png'
     }
   ];
 
   return (
-    <section id="experience" className="py-20 bg-gray-50 dark:bg-gray-900">
+    <section id="experience" className="py-20 bg-white dark:bg-gray-900">
       <div className="container mx-auto px-4 md:px-6">
         <SectionHeader
           title="Professional Experience"
-          subtitle="My journey in AI, machine learning, and software development"
+          subtitle="My journey through professional roles and projects"
         />
         
-        <div className="pt-10">
-          {experiences.map((experience, index) => (
+        <ExperienceStats />
+        
+        <div className="py-8">
+          {experiences.map((exp, index) => (
             <ExperienceCard 
               key={index}
-              {...experience}
+              {...exp}
               index={index}
             />
           ))}
         </div>
-
-        {/* Education */}
-        <motion.div 
-          className="mt-20"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.5 }}
-        >
-          <h3 className="text-2xl font-bold text-center mb-10 bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
-            Education
-          </h3>
+        
+        <div className="mt-20">
+          <SectionHeader
+            title="Education"
+            subtitle="Academic background and qualifications"
+          />
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
             {education.map((edu, index) => (
               <EducationCard
                 key={index}
@@ -298,7 +335,7 @@ const ExperienceSection = () => {
               />
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

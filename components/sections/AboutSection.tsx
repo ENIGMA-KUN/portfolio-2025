@@ -192,7 +192,8 @@ const AboutSection = () => {
   ];
   
   const stats = [
-    { value: "5+", label: "Years Experience" },
+    { value: "1.5+", label: "Professional Experience" },
+    { value: "3+", label: "Startup Experience" },
     { value: "20+", label: "Projects Completed" },
     { value: "9", label: "Hackathon Wins" },
     { value: "4", label: "Publications" }

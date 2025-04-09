@@ -22,20 +22,20 @@ export default function HeroSection() {
   }, []);
   
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-dark to-gray-900">
       {/* Neural Network Background */}
       <div className="absolute inset-0 z-0">
         <BackgroundAnimation />
       </div>
       
       {/* Singularity Image */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-60 pointer-events-none z-[1]">
+      <div className="absolute inset-0 flex items-center justify-center opacity-40 pointer-events-none z-[1]">
         <Image
           src="/images/singularity.png"
           alt="AI and Human Connection"
           width={1200}
           height={900}
-          className="object-contain mix-blend-lighten"
+          className="object-contain mix-blend-screen"
           priority
         />
       </div>
@@ -50,7 +50,7 @@ export default function HeroSection() {
             transition={{ duration: 0.8 }}
             className="mb-12"
           >
-            <div className="w-48 h-48 mx-auto rounded-full border-4 border-primary/50 overflow-hidden bg-dark/30 backdrop-blur-sm shadow-glow">
+            <div className="w-48 h-48 mx-auto rounded-full border-4 border-primary/50 overflow-hidden bg-gray-800/50 backdrop-blur-sm shadow-glow">
               <Image
                 src="/images/profile.jpg"
                 alt="Shubham Chakraborty"

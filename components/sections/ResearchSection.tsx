@@ -8,7 +8,7 @@ const ResearchSection = () => {
       title: "Predicting Emergent Capabilities in LLMs",
       conference: "International Conference on Machine Learning (ICML)",
       year: 2025,
-      authors: ["Shubham Chakraborty", "John Doe", "Jane Smith"],
+      authors: ["Shubham Chakraborty", "Anupam Srivastava"],
       abstract: "Novel research into capability thresholds across LLM architectures using advanced E-manifold metrics to quantify and predict emergent behaviors at different model scales.",
       isUnderReview: true
     },
@@ -16,7 +16,7 @@ const ResearchSection = () => {
       title: "Transparency In Carbon Credit By Automating Data-Management Using Blockchain",
       conference: "IEEE International Conference on Blockchain and Distributed Systems Security",
       year: 2022,
-      authors: ["Shubham Chakraborty", "Alex Johnson", "Maria Garcia"],
+      authors: ["Shubham Chakraborty", "Divya Kalash", "Anupam Srivastava"],
       doi: "10.1109/ICBDS53701.2022.9935979",
       abstract: "This paper presents a novel approach to carbon credit verification using blockchain technology and automated data collection, enhancing transparency and reducing verification time by 40%."
     },
@@ -24,7 +24,7 @@ const ResearchSection = () => {
       title: "Development of Information Technology Telecom Chatbot: An Artificial Intelligence and Machine Learning Approach",
       conference: "IEEE International Conference on Intelligent Engineering and Management",
       year: 2021,
-      authors: ["Shubham Chakraborty", "Robert Chen"],
+      authors: ["Shubham Chakraborty", "Anupam Srivastava"],
       doi: "10.1109/ICIEM51511.2021.9445354",
       abstract: "Implementation of an intelligent chatbot for telecom customer service using transformer-based architectures and transfer learning techniques, achieving 80% response coherence."
     },
@@ -32,7 +32,7 @@ const ResearchSection = () => {
       title: "Virtual Office Prototype: A Unity-2D work Simulation",
       conference: "IEEE International Conference on Tools with Artificial Intelligence",
       year: 2021,
-      authors: ["Shubham Chakraborty", "Priya Patel", "Michael Wong"],
+      authors: ["Shubham Chakraborty", "Anupam Srivastava"],
       doi: "10.1109/ICTAI53825.2021.9673456",
       abstract: "Development of a virtual office environment with real-time collaboration features, facial recognition for attendance, and AI-powered meeting scheduling to reduce conflicts by 40%."
     }
