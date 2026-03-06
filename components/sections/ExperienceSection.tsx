@@ -82,14 +82,16 @@ const ExperienceCard = ({
             <span className="text-gray-600 dark:text-gray-400">{location}</span>
           </p>
           
-          <ul className="space-y-3 mb-4">
-            {description.map((item, i) => (
-              <li key={i} className="text-gray-600 dark:text-gray-400 flex items-start">
-                <span className="mr-2 text-primary mt-1.5">•</span>
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
+          {description.length > 0 && (
+            <ul className="space-y-3 mb-4">
+              {description.map((item, i) => (
+                <li key={i} className="text-gray-600 dark:text-gray-400 flex items-start">
+                  <span className="mr-2 text-primary mt-1.5">•</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          )}
           
           {technologies.length > 0 && (
             <div className="flex flex-wrap gap-1.5 mt-4">
@@ -237,16 +239,43 @@ const ExperienceStats = () => {
 const ExperienceSection = () => {
   const experiences = [
     {
-      title: 'AI Research Assistant',
+      title: 'AI Engineering Specialist',
       company: 'Arizona State University',
       location: 'Tempe, AZ',
-      startDate: 'Jan 2025',
+      startDate: 'Feb 2026',
+      endDate: 'Present',
+      description: [],
+      technologies: ['GPT-5', 'LangChain', 'LangGraph', 'SentenceBERT', 'Docker', 'RAG', 'LoRA', 'Multi-Agent Systems'],
+      logo: '/images/logos/asu.png'
+    },
+    {
+      title: 'AI Innovation Engineer',
+      company: 'Arizona State University',
+      location: 'Tempe, AZ',
+      startDate: 'Jun 2025',
+      endDate: 'Jan 2026',
+      description: [],
+      technologies: ['GPT-4o', 'LangChain', 'Canvas LMS', 'ETL', 'Multi-Agent Systems', 'Python'],
+      logo: '/images/logos/asu.png'
+    },
+    {
+      title: 'Machine Learning Engineer',
+      company: 'Aranya.io (Acquired by NPCI / Snapper Future Tech)',
+      location: 'Remote',
+      startDate: 'Oct 2021',
+      endDate: 'May 2023',
+      description: [],
+      technologies: ['Python', 'XGBoost', 'Random Forest', 'spaCy', 'AWS ECS', 'Docker', 'MLOps', 'GitHub Actions'],
+      logo: '/images/logos/emitrix.png'
+    },
+    {
+      title: 'Instructional Design Assistant (AI In Education)',
+      company: 'Arizona State University',
+      location: 'Tempe, AZ',
+      startDate: 'Apr 2024',
       endDate: 'May 2025',
-      description: [
-        'Built comprehensive RAG system combining vector databases with fine-tuned LLMs, achieving 78% improvement in answer accuracy and reducing hallucinations by 65% for academic information retrieval tasks.',
-        'Conducted extensive prompt engineering experiments across cutting-edge foundation models (GPT-4, Claude, Llama-2), improving response quality by 37% through systematic optimization of query patterns and context windows.'
-      ],
-      technologies: ['RAG', 'Vector Databases', 'LLMs', 'Prompt Engineering'],
+      description: [],
+      technologies: ['LLMs', 'Chain of Thought', 'React', 'Canvas LMS', 'Python'],
       logo: '/images/logos/asu.png'
     },
     {
@@ -255,27 +284,9 @@ const ExperienceSection = () => {
       location: 'Coimbatore, IN',
       startDate: 'Apr 2024',
       endDate: 'Jun 2024',
-      description: [
-        'Developed scalable BERT-based NLU system achieving 95% accuracy across 12+ customer intent categories and reducing response times from 15 to 5 minutes for 1000+ daily customer service interactions.',
-        'Optimized end-to-end ML pipeline on AWS infrastructure, reducing model serving costs by 20% and processing latency by 40% while maintaining prediction quality through efficient batch processing and caching.',
-        'Implemented advanced data augmentation techniques, increasing training samples by 300% and improving model robustness to unseen queries by 25% through comprehensive distribution testing and validation.'
-      ],
+      description: [],
       technologies: ['BERT', 'AWS', 'NLU', 'Data Augmentation', 'ML Pipelines'],
       logo: '/images/logos/nexus.png'
-    },
-    {
-      title: 'Software Engineer (Instructional Design Assistant)',
-      company: 'Arizona State University',
-      location: 'Tempe, AZ',
-      startDate: 'May 2024',
-      endDate: 'Jan 2025',
-      description: [
-        'Architected a responsive UI with WCAG 2.1 compliance for the LTH engineering website, resulting in 30% faster page load times and 95% reduction in accessibility issues across 100+ dynamic pages.',
-        'Implemented custom CMS plugins and RESTful API integrations with the Canvas LMS, reducing faculty course publishing time by 45% while enabling seamless collaboration for 50+ instructors across departments.',
-        'Developed interactive analytics dashboards using React, D3.js, and Redux for real-time user engagement tracking, driving a 20% increase in site traffic and producing actionable insights for content optimization.'
-      ],
-      technologies: ['React', 'D3.js', 'Redux', 'RESTful APIs', 'Canvas LMS'],
-      logo: '/images/logos/asu.png'
     },
     {
       title: 'Full Stack Developer (Internship)',
@@ -283,28 +294,9 @@ const ExperienceSection = () => {
       location: 'Bengaluru, IN',
       startDate: 'Feb 2023',
       endDate: 'Apr 2023',
-      description: [
-        'Engineered responsive data visualization components using React, TypeScript, and D3.js for real-time dashboards, improving data visibility by 40% and enabling faster decision-making for business stakeholders.',
-        'Developed scalable RESTful APIs using Node.js, Express, and MongoDB for efficient data retrieval, reducing average page load times by 30% and enhancing overall user experience across web applications.',
-        'Implemented a robust CI/CD pipeline with GitHub Actions, achieving 90% test coverage through Jest and Cypress, resulting in 75% reduction in QA time and accelerated release cycles.'
-      ],
+      description: [],
       technologies: ['React', 'TypeScript', 'Node.js', 'MongoDB', 'CI/CD'],
       logo: '/images/logos/varcons.png'
-    },
-    {
-      title: 'Founder & CEO',
-      company: 'Emitrix.io',
-      location: 'Remote',
-      startDate: 'Aug 2022',
-      endDate: 'Jan 2023',
-      description: [
-        'Built Sustain AI using OpenAI\'s GPT-3.5 API and custom Python scripts to parse environmental data, reducing report generation time by 40% for 8 enterprise clients while securing $100K seed funding.',
-        'Trained Random Forest and XGBoost models on client energy consumption patterns, identifying peak usage times and suggesting optimizations that reduced consumption by 30%.',
-        'Developed custom spaCy NER model to extract compliance metrics from documents, automating 50% of manual reporting tasks.',
-        'Implemented MLOps using Docker containers on AWS ECS with auto-scaling and CloudWatch monitoring for 99% uptime.'
-      ],
-      technologies: ['GPT-3.5', 'Machine Learning', 'AWS', 'Docker', 'MLOps', 'spaCy'],
-      logo: '/images/logos/emitrix.png'
     }
   ];
 
@@ -342,8 +334,6 @@ const ExperienceSection = () => {
           title="Professional Experience"
           subtitle="My journey through professional roles and projects"
         />
-        
-        <ExperienceStats />
         
         <div className="py-8">
           {experiences.map((exp, index) => (

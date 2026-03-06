@@ -10,7 +10,7 @@ export default function HeroSection() {
     'AI/ML Engineer',
     'Data Scientist',
     'Full Stack Developer',
-    'Entrepreneur'
+    'Superintelligence Research Scientist'
   ];
   
   useEffect(() => {

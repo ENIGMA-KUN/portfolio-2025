@@ -202,11 +202,11 @@ const AboutSection = () => {
   ];
   
   const stats = [
-    { value: "1.5+", label: "Professional Experience" },
+    { value: "4+", label: "Professional Experience" },
     { value: "3+", label: "Startup Experience" },
     { value: "20+", label: "Projects Completed" },
     { value: "9", label: "Hackathon Wins" },
-    { value: "4", label: "Publications" }
+    { value: "9", label: "Publications" }
   ];
   
   return (
@@ -248,6 +248,10 @@ const AboutSection = () => {
               <p className="text-lg leading-relaxed">
                 With a proven track record of hackathon wins, research publications, and successful projects, I combine technical expertise with a business-oriented mindset to deliver impactful solutions. I thrive in collaborative environments where I can leverage my technical skills to create innovative products.
               </p>
+
+              <p className="text-lg leading-relaxed">
+                Beyond engineering, I&apos;m deeply drawn to the question of what comes next — the path toward <span className="text-primary font-medium">AGI and the Singularity</span>. I believe the critical stepping stones are <span className="text-primary font-medium">working memory systems</span> and <span className="text-primary font-medium">metacognition</span> — the ability for an AI to reason about its own reasoning, dynamically allocate cognitive resources, and build persistent internal context. I&apos;m actively exploring these mechanisms as precursors to superintelligence, studying how systems can move from task-level competence to genuine self-aware problem-solving.
+              </p>
             </motion.div>
             
             {/* Stats */}
@@ -287,23 +291,23 @@ const AboutSection = () => {
               <ul className="space-y-2">
                 <li className="flex items-start text-gray-600 dark:text-gray-400">
                   <span className="text-primary mr-2">•</span>
-                  <span>Building RAG systems with vector databases and LLMs</span>
+                  <span>Multi-agent LLM orchestration & agentic pipelines</span>
                 </li>
                 <li className="flex items-start text-gray-600 dark:text-gray-400">
                   <span className="text-primary mr-2">•</span>
-                  <span>Developing ML pipelines for production environments</span>
+                  <span>RAG systems with vector databases & semantic retrieval</span>
                 </li>
                 <li className="flex items-start text-gray-600 dark:text-gray-400">
                   <span className="text-primary mr-2">•</span>
-                  <span>Climate technology and emissions reduction modeling</span>
+                  <span>Production MLOps on AWS ECS with Docker & CI/CD</span>
                 </li>
                 <li className="flex items-start text-gray-600 dark:text-gray-400">
                   <span className="text-primary mr-2">•</span>
-                  <span>Full-stack development with React and Python</span>
+                  <span>Superintelligence research: working memory & metacognition</span>
                 </li>
                 <li className="flex items-start text-gray-600 dark:text-gray-400">
                   <span className="text-primary mr-2">•</span>
-                  <span>Data analysis and statistical modeling</span>
+                  <span>IES-funded researcher with 9 peer-reviewed publications</span>
                 </li>
               </ul>
             </motion.div>
@@ -311,8 +315,8 @@ const AboutSection = () => {
         </div>
         
         {/* Skills section */}
-        <div className="mt-20">
-          <motion.h3 
+        {/* <div className="mt-20">
+          <motion.h3
             className="text-2xl font-bold text-center mb-10 bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -321,27 +325,27 @@ const AboutSection = () => {
           >
             Technical Skills
           </motion.h3>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <SkillCategory 
-              title="AI & Machine Learning" 
-              skills={aiMlSkills} 
+            <SkillCategory
+              title="AI & Machine Learning"
+              skills={aiMlSkills}
               icon={<FaBrain size={24} />}
             />
-            
-            <SkillCategory 
-              title="Data Science" 
-              skills={dataSkills} 
+
+            <SkillCategory
+              title="Data Science"
+              skills={dataSkills}
               icon={<FaDatabase size={24} />}
             />
-            
-            <SkillCategory 
-              title="Development" 
-              skills={devSkills} 
+
+            <SkillCategory
+              title="Development"
+              skills={devSkills}
               icon={<FaCode size={24} />}
             />
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

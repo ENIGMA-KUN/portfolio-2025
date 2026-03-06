@@ -14,7 +14,7 @@ const Footer = () => {
               </span>
             </Link>
             <p className="mt-4 text-gray-600 dark:text-gray-400">
-              AI/ML Engineer | Data Scientist | Full Stack Developer | Entrepreneur
+              AI/ML Engineer | Data Scientist | Full Stack Developer | Superintelligence Research Scientist
             </p>
             <div className="mt-6 flex space-x-4">
               <motion.a 
