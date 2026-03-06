@@ -27,7 +27,7 @@ export const projectsData: Project[] = [
     title: 'Emissions Reduction Modeling Platform',
     description: 'Developed a comprehensive climate scenario analysis engine that enables 30-50% reduction modeling by 2030. Created financial impact analysis tools calculating NPV, ROI, payback periods, and marginal abatement costs with statistical forecasting capabilities.',
     technologies: ['Python', 'Pandas', 'AWS', 'React', 'D3.js', 'MongoDB'],
-    demoLink: 'https://emitrix.io',
+    demoLink: 'https://aranya-ai.vercel.app/',
     image: '/images/projects/emissions-platform.png',
     achievement: 'Secured $100K seed funding',
     reversed: true,

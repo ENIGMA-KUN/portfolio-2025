@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaGoogle } from 'react-icons/fa';
+import { SiOrcid } from 'react-icons/si';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -59,6 +60,11 @@ const Header = () => {
           <a href="https://scholar.google.com" target="_blank" rel="noopener noreferrer"
              className="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors">
             <FaGoogle size={20} />
+          </a>
+          <a href="https://orcid.org/0009-0004-5796-5820" target="_blank" rel="noopener noreferrer"
+             className="transition-colors" style={{ color: '#A6CE39' }}
+             title="ORCID Profile">
+            <SiOrcid size={20} />
           </a>
           
           <button className="md:hidden text-gray-600 dark:text-gray-300">

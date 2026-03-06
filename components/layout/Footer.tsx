@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaYoutube, FaEnvelope } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { SiOrcid } from 'react-icons/si';
 
 const Footer = () => {
   return (
@@ -35,21 +36,22 @@ const Footer = () => {
               >
                 <FaLinkedin size={24} />
               </motion.a>
-              <motion.a 
-                href="https://www.youtube.com/c/ENIGMAKUN" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                whileHover={{ y: -3 }}
-                className="text-gray-600 hover:text-primary dark:text-gray-400 dark:hover:text-primary"
-              >
-                <FaYoutube size={24} />
-              </motion.a>
-              <motion.a 
-                href="mailto:chakraborty.shubham007@gmail.com" 
+              <motion.a
+                href="mailto:chakraborty.shubham007@gmail.com"
                 whileHover={{ y: -3 }}
                 className="text-gray-600 hover:text-primary dark:text-gray-400 dark:hover:text-primary"
               >
                 <FaEnvelope size={24} />
+              </motion.a>
+              <motion.a
+                href="https://orcid.org/0009-0004-5796-5820"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ y: -3 }}
+                style={{ color: '#A6CE39' }}
+                title="ORCID: 0009-0004-5796-5820"
+              >
+                <SiOrcid size={24} />
               </motion.a>
             </div>
           </div>
@@ -91,7 +93,7 @@ const Footer = () => {
               <span className="font-medium">Email:</span> chakraborty.shubham007@gmail.com
             </p>
             <p className="text-gray-600 dark:text-gray-400">
-              <span className="font-medium">Location:</span> Tempe, AZ
+              <span className="font-medium">Location:</span> United States
             </p>
           </div>
         </div>

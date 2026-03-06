@@ -242,7 +242,7 @@ const AboutSection = () => {
               </p>
               
               <p className="text-lg leading-relaxed">
-                My expertise spans across the AI/ML spectrum – from developing sophisticated RAG systems and fine-tuning foundation models to creating scalable ML pipelines and building full-stack applications. I'm particularly interested in applications of AI in climate technology, having founded Emitrix.io, a startup focused on emissions reduction modeling.
+                My expertise spans across the AI/ML spectrum – from developing sophisticated RAG systems and fine-tuning foundation models to creating scalable ML pipelines and building full-stack applications. I'm particularly interested in applications of AI in climate technology, having founded Aranya.io, a startup focused on emissions reduction modeling.
               </p>
               
               <p className="text-lg leading-relaxed">
